@@ -1,16 +1,14 @@
 export const projects = [
   {
-    title: "Capitalquest",
-    description: "A mobile app for financial education",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfaIWXc5U7LhCryaOithqCt3KGCzv2hN-ldA&s",
-    link: "https://github.com/username/pethsapp",
+    title: "CapitalQuest",
+    image: "/uwaterloo_logo_black.png",
+    link: "https://github.com",
     tags: ["React Native", "TypeScript", "Firebase"],
   },
   {
-    title: "CapitalQuest",
-    description: "A web platform for investment learning",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfaIWXc5U7LhCryaOithqCt3KGCzv2hN-ldA&s",
-    link: "https://github.com/username/quadratic-ui",
+    title: "CapitalQuest 2",
+    image: "/uwaterloo_logo_black.png",
+    link: "https://github.comi",
     tags: ["Next.js", "TypeScript", "TailwindCSS"],
   },
   // ... other projects
