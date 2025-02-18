@@ -1,0 +1,35 @@
+.custom-timeline.vertical-timeline.vertical-timeline--one-column-right {
+  padding: 0;
+  margin-left: 0;
+}
+
+.custom-timeline.vertical-timeline.vertical-timeline--one-column-right:before {
+  left: 18px;
+}
+
+.custom-timeline.vertical-timeline.vertical-timeline--one-column-right .vertical-timeline-element-icon {
+  left: 0;
+  top: 24px;
+  transform: translateX(0);
+}
+
+.custom-timeline.vertical-timeline.vertical-timeline--one-column-right .vertical-timeline-element-content {
+  margin-left: 60px;
+  box-shadow: none;
+}
+
+.custom-timeline.vertical-timeline.vertical-timeline--one-column-right .vertical-timeline-element-content-arrow {
+  display: none;
+}
+
+.custom-timeline.vertical-timeline.vertical-timeline--one-column-right .vertical-timeline-element-content .vertical-timeline-element-date {
+  left: auto;
+  right: auto;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  float: none;
+  display: block;
+  color: #888;
+  opacity: 0.8;
+  font-size: 0.9rem;
+} 
