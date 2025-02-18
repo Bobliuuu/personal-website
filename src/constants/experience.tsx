@@ -6,7 +6,7 @@ export const experiences: ExperienceItem[] = [
     company: "Your mom's house",
     location: "WATERLOO, ON",
     date: "JAN 2025 - PRESENT",
-    logo: "https://v0.dev/placeholder.svg",
+    logo: "/vercel.svg",
     points: ["did some stuff"],
     tags: ["KOTLIN", "JAVA"],
   },
@@ -15,7 +15,7 @@ export const experiences: ExperienceItem[] = [
     company: "University of Waterloo",
     location: "WATERLOO, ON",
     date: "MAY 2024 - JAN 2025",
-    logo: "https://v0.dev/placeholder.svg",
+    logo: "/uwaterloo_logo_black.png",
     points: [
       "Did stuff",
       "Fucked around",

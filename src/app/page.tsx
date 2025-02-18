@@ -4,7 +4,7 @@ import Info from "@/components/info"
 import Experience from "@/components/experience"
 import Projects from "@/components/projects"
 import Contact from "@/components/contact"
-import Footer from "@/components/footer"
+import Socials from "@/components/socials";
 import ParticlesBackground from "@/components/particles"
 
 export default function Page() {
@@ -18,8 +18,8 @@ export default function Page() {
         <Experience />
         <Projects />
         <Contact />
-        <Footer />
       </div>
+      <Socials />
     </main>
   )
 }

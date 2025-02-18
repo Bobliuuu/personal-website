@@ -2,30 +2,26 @@ import type { LucideIcon } from "lucide-react"
 
 export type NavItem = {
   title: string
-  href: string
+  id: string
   icon?: LucideIcon
 }
 
 export const navItems: NavItem[] = [
   {
     title: "Projects",
-    href: "/projects",
+    id: "projects",
   },
   {
     title: "Experiences",
-    href: "/experiences",
-  },
-  {
-    title: "About",
-    href: "/about",
+    id: "experiences",
   },
   {
     title: "Contact",
-    href: "/contact",
+    id: "contact",
   },
   {
     title: "Resume",
-    href: "/resume",
+    id: "resume",
   },
 ]
 

@@ -27,10 +27,10 @@ export default function Experience() {
             icon={
               <div className="flex items-center justify-center w-full h-full">
                 <Image
-                  src={experience.logo || "/placeholder.svg"}
+                  src={experience.logo || "/uwaterloo_logo_black.png"}
                   alt={experience.company}
-                  width={40}
-                  height={40}
+                  width={50}
+                  height={50}
                   className="rounded-full"
                 />
               </div>
