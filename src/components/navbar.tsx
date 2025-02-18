@@ -10,6 +10,13 @@ import { navItems } from "@/constants/navbar"
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
     <header className="py-6">
       <div className="max-w-[1800px] mx-auto px-12 sm:px-16 lg:px-24 flex justify-between items-center">
@@ -19,14 +26,14 @@ export default function Navbar() {
           /span>
         </Link>
         <nav className="flex flex-1 items-center justify-end space-x-6 text-sm font-medium">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
+          {navItems.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToSection(item.id)}
               className="text-foreground/60 transition-colors hover:text-foreground"
             >
               {item.title}
-            </Link>
+            </button>
           ))}
           <Button
             variant="ghost"

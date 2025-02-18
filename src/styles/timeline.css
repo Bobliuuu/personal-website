@@ -1,20 +1,23 @@
-.custom-timeline.vertical-timeline.vertical-timeline--one-column-right {
+g.custom-timeline.vertical-timeline.vertical-timeline--one-column-right {
   padding: 0;
   margin-left: 0;
 }
 
 .custom-timeline.vertical-timeline.vertical-timeline--one-column-right:before {
-  left: 18px;
+  left: 24px;
+  width: 3px;
 }
 
 .custom-timeline.vertical-timeline.vertical-timeline--one-column-right .vertical-timeline-element-icon {
   left: 0;
   top: 24px;
   transform: translateX(0);
+  width: 50px; 
+  height: 50px;
 }
 
 .custom-timeline.vertical-timeline.vertical-timeline--one-column-right .vertical-timeline-element-content {
-  margin-left: 60px;
+  margin-left: 80px;
   box-shadow: none;
 }
 
