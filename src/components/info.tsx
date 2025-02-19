@@ -45,7 +45,7 @@ export default function Info() {
               <Button
                 key={index}
                 variant="secondary"
-                className="bg-gray-800/40 hover:bg-gray-800/60 text-gray-200"
+                className="border border-white bg-gray-800/40 hover:bg-gray-800/60 text-gray-200"
               >
                 {skill}
               </Button>

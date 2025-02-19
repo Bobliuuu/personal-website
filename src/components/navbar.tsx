@@ -30,7 +30,7 @@ export default function Navbar() {
             <button
               key={index}
               onClick={() => scrollToSection(item.id)}
-              className="text-foreground/60 transition-colors hover:text-foreground"
+              className="text-foreground/80 transition-colors hover:text-foreground"
             >
               {item.title}
             </button>
