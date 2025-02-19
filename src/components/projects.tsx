@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 
 export default function Projects() {
   return (
-    <div className="flex items-start justify-center gap-4 max-w-[1800px] mx-auto px-12 sm:px-16 lg:px-24 pt-0">
+    <div id="projects" className="flex items-start justify-center gap-4 max-w-[1800px] mx-auto px-12 sm:px-16 lg:px-24 pt-0">
       {projects.map((project, index) => (
         <Link 
           key={index}
