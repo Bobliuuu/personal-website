@@ -44,7 +44,7 @@ export default function Experience() {
               <Button
                 variant="secondary"
                 size="sm"
-                className="mt-2 bg-gray-800/40 hover:bg-gray-800/60 text-gray-200"
+                className="border border-white mt-2 bg-gray-800/40 hover:bg-gray-800/60 text-gray-200"
               >
                 {experience.location}
               </Button>

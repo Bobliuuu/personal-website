@@ -12,7 +12,7 @@ export default function Projects() {
           key={index}
           href={project.link}
           target="_blank" 
-          className="relative aspect-[1.2/1] w-[500px] overflow-hidden rounded-3xl group"
+          className="relative aspect-[1.2/1] w-[500px] overflow-hidden rounded-3xl group border border-white"
         >
           <Image
             src={project.image}
@@ -26,19 +26,25 @@ export default function Projects() {
                 key={tagIndex}
                 variant="secondary"
                 size="sm"
-                className="bg-gray-800/40 hover:bg-gray-800/60 text-gray-200"
+                className="bg-gray-800/40 hover:bg-gray-800/60 text-gray-200 border border-white"
               >
                 {tag}
               </Button>
             ))}
           </div>
           <div className="absolute bottom-8 left-8 z-10">
-            <h1 className="text-4xl font-semibold text-zinc-400">{project.title}</h1>
+            <h1 className="text-4xl font-semibold bg-gradient-to-r from-gray-100 via-gray-500 via-50% to-gray-100 bg-clip-text text-transparent">
+              {project.title}
+            </h1>
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           <div className="absolute right-4 top-4 z-10">
-            <Button variant="ghost" size="icon">
-              <Github className="h-6 w-6" />
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="border border-white"
+            >
+              <Github className="h-6 w-6"/>
               <span className="sr-only">{project.title} GitHub</span>
             </Button>
           </div>
