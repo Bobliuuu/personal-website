@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 export default function Experience() {
   return (
     <div className="max-w-[1800px] mx-auto px-12 sm:px-16 lg:px-24 pb-10">
-      <h2 className="text-3xl sm:text-3xl lg:text-4xl font-medium mb-8 pt-10">
+      <h2 id="experiences" className="text-3xl sm:text-3xl lg:text-4xl font-medium mb-8 pt-10">
         Experiences
       </h2>
       <VerticalTimeline 
