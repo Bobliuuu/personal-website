@@ -3,7 +3,7 @@ import type { ExperienceItem } from "../types/experience"
 export const experiences: ExperienceItem[] = [
   {
     title: "Software Developer",
-    company: "Your mom's house",
+    company: "Sheridan College",
     location: "WATERLOO, ON",
     date: "JAN 2025 - PRESENT",
     logo: "/vercel.svg",
@@ -18,8 +18,7 @@ export const experiences: ExperienceItem[] = [
     logo: "/uwaterloo_logo_black.png",
     points: [
       "Did stuff",
-      "Fucked around",
-      "Found out",  
+      "Talked to people",  
     ],
   },
 ]

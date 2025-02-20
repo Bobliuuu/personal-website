@@ -10,8 +10,10 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 py-24">
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-gray-100 via-gray-400 via-30% to-gray-100 bg-clip-text text-transparent">
-              Let&apos;s get in touch!
+            <h1 className="text-3xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-30% to-gray-400 bg-clip-text text-transparent">
+                Let&apos;s get in touch!
+              </span>
             </h1>
             <p className="text-gray-400 text-medium">
               Want to contact me? Feel free to send me a message.
