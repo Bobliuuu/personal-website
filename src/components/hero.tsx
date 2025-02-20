@@ -21,14 +21,16 @@ export default function Hero() {
         I organize and attend <strong>clubs</strong>, <strong>hackathons</strong>, and <strong>conferences</strong>. 
         I play <strong>varsity ultimate</strong>, perform <strong>acapella</strong> and <strong>dance</strong>, and love <strong>gardening</strong>!
       </p>
-      <h3 className="text-2xl font-medium text-gray-300 mt-4">
+      <h3 className="text-3xl font-medium text-gray-300 mt-4">
         <Button
           variant="ghost"
-          className="text-gray-300 hover:text-white hover:bg-gray-800/40"
+          className="border border-white text-gray-300 hover:text-white hover:bg-gray-800/40 px-4 py-5"
           asChild
         >
           <Link href="https://drive.google.com/file/d/1kKW3u3xrT2LfS6C6oqsKSVjqPnZ1deF7/view?usp=sharing" target="_blank" >
-            Resume
+            <span className="text-lg bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
+              Resume
+            </span>
           </Link>
         </Button>
       </h3>

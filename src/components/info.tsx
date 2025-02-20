@@ -12,7 +12,9 @@ export default function Info() {
         {/* Education Section */}
         <div>
           <h2 className="text-3xl sm:text-3xl lg:text-4xl font-medium mb-8">
-            Education
+            <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
+              Education
+            </span>
           </h2>
           <div className="flex items-center gap-4">
             <div className="relative w-16 h-16">
@@ -38,7 +40,9 @@ export default function Info() {
         {/* Skills Section */}
         <div>
           <h2 className="text-3xl sm:text-3xl lg:text-4xl font-medium mb-8 pt-10">
-            Skills
+            <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
+              Skills
+            </span>
           </h2>
           <div className="flex flex-wrap gap-2">
             {skills.flat().map((skill, index) => (

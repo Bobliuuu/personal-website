@@ -11,7 +11,9 @@ export default function Experience() {
   return (
     <div className="max-w-[1800px] mx-auto px-12 sm:px-16 lg:px-24 pb-10">
       <h2 id="experiences" className="text-3xl sm:text-3xl lg:text-4xl font-medium mb-8 pt-10">
-        Experiences
+        <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
+          Experiences
+        </span>
       </h2>
       <VerticalTimeline 
         lineColor="#FFFFFF"
@@ -23,7 +25,11 @@ export default function Experience() {
             key={index}
             contentStyle={{ background: "#000000", color: "#fff", boxShadow: "none", padding: "0 0 0 0" }}
             contentArrowStyle={{ display: "none" }}
-            date={experience.date}
+            date={
+              <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
+                {experience.date}
+              </span>
+            }
             icon={
               <div className="flex items-center justify-center w-full h-full">
                 <Image
@@ -39,8 +45,14 @@ export default function Experience() {
             position="right"
           >
             <div className="text-white">
-              <h3 className="text-2xl font-bold">{experience.title}</h3>
-              <h4 className="text-gray-400">{experience.company}</h4>
+              <h3 className="text-2xl font-bold">
+                <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
+                  {experience.company}
+                </span>
+              </h3>
+              <h4 className="text-white text-medium">
+                {experience.title}
+              </h4>
               <Button
                 variant="secondary"
                 size="sm"
@@ -60,7 +72,7 @@ export default function Experience() {
                       key={tagIndex}
                       variant="secondary"
                       size="sm"
-                      className="bg-gray-800/40 hover:bg-gray-800/60 text-gray-200"
+                      className="bg-gray-800/40 hover:bg-gray-800/60 text-gray-200 border border-white"
                     >
                       {tag}
                     </Button>
