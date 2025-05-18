@@ -3,7 +3,7 @@ import { footerInfo } from "@/constants/footer";
 
 export default function Socials() {
   return (
-    <div className="fixed bottom-3 left-1/2 transform -translate-x-1/2 bg-gray-300 shadow-lg rounded-2xl p-2 flex space-x-4 border border-gray-200">
+    <div className="bg-gray-600 fixed bottom-3 left-1/2 transform -translate-x-1/2 bg-gray-300 shadow-lg rounded-2xl p-2 flex space-x-4 border border-gray-200">
       {footerInfo.socials.map((social) => {
         const Icon = social.icon;
         return (
