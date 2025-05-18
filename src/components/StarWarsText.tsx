@@ -37,7 +37,7 @@ function StarWarsCrawl() {
       <Center>
         <group>
           <Text3D
-            font="/fonts/starjedi_regular.json"
+            font="/starjedi_regular.json"
             size={1}
             height={0.2}
             bevelEnabled
@@ -52,7 +52,7 @@ function StarWarsCrawl() {
             <meshStandardMaterial color={hovered ? "#fffbe1" : "#ffe81f"} emissive={hovered ? "#ffe81f" : "#000"} emissiveIntensity={hovered ? 0.7 : 0} />
           </Text3D>
           <Text3D
-            font="/fonts/starjedi_regular.json"
+            font="/starjedi_regular.json"
             size={1}
             height={0.2}
             bevelEnabled
@@ -83,7 +83,7 @@ function StarWarsCrawl() {
           <meshStandardMaterial color="#888" />
         </mesh>
         <Text3D
-        font="/fonts/starjedi_regular.json"
+        font="/starjedi_regular.json"
         size={0.45}
         height={0.1}
         position={[-1.15, -0.35, 0.5]}
@@ -106,7 +106,7 @@ function StarWarsCrawl() {
           <meshStandardMaterial color="#888" />
         </mesh>
         <Text3D
-        font="/fonts/starjedi_regular.json"
+        font="/starjedi_regular.json"
         size={0.45}
         height={0.1}
         position={[-2.3, -0.35, 0.5]}
