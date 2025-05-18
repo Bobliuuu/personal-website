@@ -6,6 +6,7 @@ export type ExperienceItem = {
     logo: string
     points: string[]
     tags?: string[]
+    images?: string[]
   }
   
   

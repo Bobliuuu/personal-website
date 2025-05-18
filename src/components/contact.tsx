@@ -6,38 +6,42 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function Contact() {
   return (
-    <section id="contact" className="text-white max-w-[1800px] mx-auto px-12 sm:px-16 lg:px-24">
-      <div className="max-w-7xl mx-auto px-4 py-24">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <h1 className="text-3xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-30% to-gray-400 bg-clip-text text-transparent">
-                Let&apos;s get in touch!
-              </span>
-            </h1>
-            <p className="text-gray-400 text-medium">
-              Want to contact me? Feel free to send me a message.
-            </p>
-          </div>
-          <div className="space-y-6">
-            <Input
-              placeholder="Name"
-              className="bg-[#111] border border-gray-700 h-12 text-white placeholder:text-gray-500 rounded-md focus:border-gray-500 focus:ring-0"
-            />
-            <Input
-              type="email"
-              placeholder="Email"
-              className="bg-[#111] border border-gray-700 h-12 text-white placeholder:text-gray-500 rounded-md focus:border-gray-500 focus:ring-0"
-            />
-            <Textarea
-              placeholder="Message"
-              className="bg-[#111] border border-gray-700 min-h-[200px] text-white placeholder:text-gray-500 rounded-md focus:border-gray-500 focus:ring-0"
-            />
-            <Button className="border border-white bg-[#111] hover:bg-[#222] text-white rounded-lg px-6 py-3 h-auto shadow-md transition-all duration-300 hover:shadow-lg">
-              Submit
-            </Button>
-          </div>
+    <section id="contact" className="w-full min-h-[60vh] flex items-center justify-center py-24 px-4">
+      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+        {/* Left: Heading and Description */}
+        <div className="flex flex-col gap-6">
+          <h1 className="text-5xl md:text-6xl font-extrabold font-inter text-white leading-tight animate-glow">
+            Contact me
+          </h1>
+          <p className="text-lg md:text-xl font-inter text-gray-300 max-w-xl">
+            Have a question, new opportunity, or just want to have a quick chat? Feel free to send me a message.
+          </p>
         </div>
+        {/* Right: Form */}
+        <form className="flex flex-col gap-6 w-full max-w-md mx-auto">
+          <Input
+            placeholder="Name"
+            className="bg-black/60 border border-gray-500/40 rounded-lg px-5 py-3 text-white font-inter text-base focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 shadow-md transition-all duration-200"
+          />
+          <Input
+            type="email"
+            placeholder="Email"
+            className="bg-black/60 border border-gray-500/40 rounded-lg px-5 py-3 text-white font-inter text-base focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 shadow-md transition-all duration-200"
+          />
+          <Textarea
+            placeholder="Message"
+            className="bg-black/60 border border-gray-500/40 rounded-lg px-5 py-3 text-white font-inter text-base min-h-[140px] focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 shadow-md transition-all duration-200"
+          />
+          <Button
+            variant="ghost"
+            className="self-start border border-white text-gray-300 hover:text-white hover:bg-gray-800/40 px-4 py-5 mt-2"
+            type="submit"
+          >
+            <span className="text-lg bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
+              Submit
+            </span>
+          </Button>
+        </form>
       </div>
     </section>
   );
