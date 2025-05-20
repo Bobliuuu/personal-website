@@ -144,3 +144,42 @@ html {
   animation: glow 1.5s ease-in-out infinite alternate;
 }
 
+@keyframes bounce-custom {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.animate-bounce-custom {
+  animation: bounce-custom 1.6s cubic-bezier(0.6, 0.05, 0.4, 1) infinite;
+}
+
+@keyframes glow-svg {
+  0% {
+    filter: drop-shadow(0 0 16px #0ff) drop-shadow(0 0 16px #0ff);
+  }
+  100% {
+    filter: drop-shadow(0 0 32px #0ff) drop-shadow(0 0 32px #0ff);
+  }
+}
+.animate-glow-svg {
+  animation: glow-svg 1.2s ease-in-out infinite alternate;
+}
+@keyframes button-glow {
+  0% {
+    filter: drop-shadow(0 0 16px #0ff) drop-shadow(0 0 32px #0ff);
+  }
+  100% {
+    filter: drop-shadow(0 0 32px #0ff) drop-shadow(0 0 64px #0ff);
+  }
+}
+
+.glow-button {
+  animation: button-glow 1.2s ease-in-out infinite alternate;
+  will-change: filter;
+}

@@ -12,19 +12,19 @@ export default function Hero() {
   useEffect(() => {
     const observer = new window.IntersectionObserver(
       ([entry]) => {
-        if (entry.intersectionRatio === 1) {
+        if (entry.isIntersecting) {
           setFrisbeeActive(true)
           setTimeout(() => setFrisbeeActive(false), 4000) // Match new animation duration
         }
       },
-      { threshold: 1.0 }
+      { threshold: 0.5 }
     )
     if (heroRef.current) observer.observe(heroRef.current)
     return () => observer.disconnect()
   }, [])
 
   return (
-    <section ref={heroRef} className="max-w-[1800px] mx-auto pt-12 sm:pt-16 pb-10 px-4 sm:px-8 lg:px-16 flex flex-col md:flex-row items-center gap-8 md:gap-16 mt-12">
+    <section id="hero" ref={heroRef} className="max-w-[1800px] mx-auto pt-12 sm:pt-16 pb-10 px-4 sm:px-8 lg:px-16 flex flex-col md:flex-row items-center gap-8 md:gap-16 mt-12">
       {/* Left: Image */}
       <div className="flex-shrink-0 w-full md:w-[340px] lg:w-[400px] flex justify-center relative">
         <img

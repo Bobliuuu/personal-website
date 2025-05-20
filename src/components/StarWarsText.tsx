@@ -6,23 +6,14 @@ import { Suspense, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { useRouter } from "next/navigation";
 
-function StarWarsCrawl() {
+type StarWarsCrawlProps = { scale: number };
+function StarWarsCrawl({ scale }: StarWarsCrawlProps) {
   const group = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
   const [hoveredLeft, setHoveredLeft] = useState(false);
   const [hoveredRight, setHoveredRight] = useState(false);
   const floatOffset = useRef(0);
   const router = useRouter();
-  const [zoomScale, setZoomScale] = useState(1);
-
-  useEffect(() => {
-    const updateScale = () => {
-      setZoomScale(window.devicePixelRatio);
-    };
-    window.addEventListener("resize", updateScale);
-    updateScale();
-    return () => window.removeEventListener("resize", updateScale);
-  }, []);
 
   useFrame(({ clock }) => {
     floatOffset.current = Math.sin(clock.getElapsedTime() * 1.2) * 0.18;
@@ -32,7 +23,7 @@ function StarWarsCrawl() {
   });
 
   return (
-    <group ref={group} rotation={[-Math.PI / 6, 0, 0]} scale={[zoomScale, zoomScale, zoomScale]}>
+    <group ref={group} rotation={[-Math.PI / 6, 0, 0]} scale={[scale, scale, scale]}>
       {/* Title Text */}
       <Center>
         <group>
@@ -120,21 +111,40 @@ function StarWarsCrawl() {
 }
 
 export default function StarWarsText() {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (wrapperRef.current) {
+        const width = wrapperRef.current.offsetWidth;
+        setScale(width / 2000);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div style={{
-      width: "100vw",
-      height: "100vh",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      pointerEvents: "none",
-      zIndex: 10
-    }}>
+    <div
+      ref={wrapperRef}
+      style={{
+        width: "100vw",
+        height: "100vh",
+        minHeight: "500px",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        pointerEvents: "none",
+        zIndex: 10,
+      }}
+    >
       <Canvas camera={{ position: [0, -2, 10], fov: 60 }}>
         <ambientLight intensity={1} />
         <directionalLight position={[0, 10, 10]} intensity={2} />
         <Suspense fallback={null}>
-          <StarWarsCrawl />
+          <StarWarsCrawl scale={scale} />
         </Suspense>
       </Canvas>
     </div>

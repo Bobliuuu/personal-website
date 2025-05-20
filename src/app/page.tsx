@@ -10,6 +10,7 @@ import StarWarsText from "@/components/starwarstext"
 import Skills from "@/components/skills"
 import RippleExperience from "@/components/experienceback"
 import ProjectsBack from "@/components/projectsback"
+import Socials from "@/components/socials"
 
 export default function Page() {
   return (
@@ -40,6 +41,7 @@ export default function Page() {
       <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24"> 
         <Contact />
       </div>  
+      <Socials /> 
     </main>
   );
 }

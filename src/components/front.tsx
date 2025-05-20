@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
 export default function Front() {
   const navbarRef = useRef<HTMLDivElement>(null);
@@ -41,6 +42,25 @@ export default function Front() {
         />
         <div className="absolute inset-0 bg-black/40" />
         {/* You can add overlay content here if needed */}
+        {/* Down Arrow Button */}
+        <button
+          onClick={() => {
+            const el = document.getElementById('hero');
+            const navbar = document.querySelector('header');
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 80;
+              const top = rect.top + scrollTop - navbarHeight - 32;
+              window.scrollTo({ top, behavior: 'smooth' });
+            }
+          }}
+          className="absolute z-20 bg-transparent hover:bg-transparent rounded-full p-2 transition-all animate-bounce-custom glow-button"
+          style={{ bottom: '25%' }}
+          aria-label="Scroll down"
+        >
+          <ChevronDownIcon className="w-8 h-8 sm:w-10 sm:h-10 text-cyan-400 animate-bounce-custom" />
+        </button>
       </section>
     </>
   );
