@@ -31,6 +31,7 @@ export default function Hero() {
           src="/jerry.png"
           alt="Jerry Zhu portrait"
           className="rounded-3xl shadow-xl object-cover w-full h-[340px] md:h-[400px]"
+          loading="lazy"
         />
         {/* Frisbee scroll-triggered animation */}
         <img
@@ -39,6 +40,7 @@ export default function Hero() {
           alt="Frisbee"
           className={`absolute w-16 h-16 ${frisbeeActive ? "frisbee-arc" : "opacity-0"}`}
           style={{ zIndex: 2, top: 0, left: 0 }}
+          loading="lazy"
         />
       </div>
       {/* Right: Text */}
