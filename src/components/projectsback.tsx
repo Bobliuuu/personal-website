@@ -69,6 +69,10 @@ export default function ProjectsBack() {
       >
         <Image src="/cloud.png" alt="Cloud right" width={400} height={120} className="opacity-80" />
       </motion.div>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#0d1f2d] to-transparent z-40 pointer-events-none" />
+
       {/* Mountains - full width and height */}
       <div className="absolute inset-0 w-full h-full z-30">
         <Image src="/mountain.png" alt="Mountains" fill className="object-cover" priority />

@@ -25,7 +25,6 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
         const finish = () => {
           requestAnimationFrame(() => {
             console.log("✅ Visually ready, ending loading screen");
-            onDone();
           });
         };
   

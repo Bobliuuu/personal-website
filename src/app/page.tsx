@@ -50,7 +50,7 @@ export default function Page() {
         <Navbar />
         <Front />
         <StarWarsText />
-        <div className="bg-gradient-to-b from-[#183c1e] via-black to-[#38c0e0]">
+        <div className="bg-gradient-to-b from-[#183c1e] via-[#0f2a14] to-[#3bf1f7]">
           <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24">
             <Hero />
             <Education />
@@ -58,13 +58,13 @@ export default function Page() {
           </div>
         </div>
         <RippleExperience />
-        <div style={{ background: "linear-gradient(to bottom,rgb(0, 208, 255) 0%,rgb(64, 54, 76) 10%,#000 80%, #000 100%)" }}>
+        <div className="bg-gradient-to-b from-black via-[#002b3a] to-black">
           <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24">
             <Experience />
           </div>
         </div>
         <ProjectsBack />
-        <div className="bg-gradient-to-b from-[#1e293b] to-black">
+        <div className="bg-gradient-to-b from-[#0d1f2d] to-black">
           <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24">
             <Projects />
           </div>

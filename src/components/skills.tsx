@@ -1,165 +1,174 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
-import { Physics, useBox, usePlane } from "@react-three/cannon";
-import { Text } from "@react-three/drei";
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-
-const skills = [
-  "React", "Next.js", "Remix", "Typescript", "SvelteKit",
-  "Tanstack", "Redux", "Zustand", "Zod", "test1", "test2", 
-  "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10"
-];
-
-const BRICKS_PER_ROW = 5;
-
-function StaticBrick({ position, skill, scale }: { position: [number, number, number]; skill: string; scale: number }) {
-  return (
-    <mesh position={position.map((v) => v * scale) as [number, number, number]}>
-      <boxGeometry args={[3 * scale, 0.8 * scale, 0.9 * scale]} />
-      <meshStandardMaterial color="#444" />
-      <Text
-        position={[0, 0, 0.5 * scale]}
-        fontSize={0.4 * scale}
-        color="#ffe81f"
-        anchorX="center"
-        anchorY="middle"
-      >
-        {skill}
-      </Text>
-    </mesh>
-  );
-}
-
-function FallingBrick({ position, skill, scale }: { position: [number, number, number]; skill: string; scale: number }) {
-  const [ref, api] = useBox(() => ({
-    mass: 1,
-    position: position.map((v) => v * scale) as [number, number, number],
-    args: [3 * scale, 0.8 * scale, 0.9 * scale],
-  }));
-
-  useEffect(() => {
-    const x = (Math.random() - 0.5) * 3 * scale;
-    const y = (2 + Math.random() * 3) * scale;
-    const z = (Math.random() - 0.5) * 3 * scale;
-    api.applyImpulse([x, y, z], [0, 0, 0]);
-  }, [api, scale]);
-
-  return (
-    <mesh ref={ref} castShadow receiveShadow>
-      <boxGeometry args={[3 * scale, 0.8 * scale, 0.9 * scale]} />
-      <meshStandardMaterial color="#444" />
-      <Text
-        position={[0, 0, 0.5 * scale]}
-        fontSize={0.4 * scale}
-        color="#ffe81f"
-        anchorX="center"
-        anchorY="middle"
-      >
-        {skill}
-      </Text>
-    </mesh>
-  );
-}
-
-function Ground() {
-  usePlane(() => ({
-    rotation: [-Math.PI /    2, 0, 0],
-    position: [0, -1, 0],
-  }));
-  return null;
-}
-
-function BrickWall({ falling, scale }: { falling: boolean; scale: number }) {
-  return (
-    <>
-      {skills.map((skill, index) => {
-        const row = Math.floor(index / BRICKS_PER_ROW);
-        const col = index % BRICKS_PER_ROW;
-        const x = (col - (BRICKS_PER_ROW - 1) / 2) * 3.4;
-        const y = row * -1.1 + 2;
-        const z = 0;
-        const pos: [number, number, number] = [x, y, z];
-        return falling ? (
-          <FallingBrick key={index} position={pos} skill={skill} scale={scale} />
-        ) : (
-          <StaticBrick key={index} position={pos} skill={skill} scale={scale} />
-        );
-      })}
-    </>
-  );
-}
+import { skillCategories } from "@/constants/skills";
 
 export default function Skills() {
-  const [falling, setFalling] = useState(false);
-  const [showList, setShowList] = useState(false);
-  const [scale, setScale] = useState(1);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedCategory, setSelectedCategory] = useState(skillCategories[0]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current) {
-        const width = containerRef.current.offsetWidth;
-        setScale(Math.max(0.4, Math.min(1, width / 1200)));
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (falling) {
-      const timeout = setTimeout(() => setShowList(true), 3000);
-      return () => clearTimeout(timeout);
-    }
-  }, [falling]);
+  const handleCategoryClick = (category: SkillCategory) => {
+    setSelectedCategory(category);
+  };
 
   return (
-    <section className="w-full mx-auto px-12 sm:px-16 lg:px-24 mt-12 mb-12">
-      <h2 className="animate-glow text-4xl font-semibold mb-8 text-center text-transparent bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text">
-        Skills
-      </h2>
+    <>
+      <style jsx>{`
+        .book-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          perspective: 1000px;
+        }
+        
+        .box-out {
+          width: 720px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 40px;
+        }
+        
+        .book {
+          width: 180px;
+          height: 255px;
+          background-color: rgb(62, 71, 152);
+          transition: all .3s ease-in-out;
+          transform-origin: left center 0px;
+          transform-style: preserve-3d;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+          -webkit-backface-visibility: hidden;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          padding-top: 30px;
+          box-sizing: border-box;
+          cursor: pointer;
+        }
+        
+        .book-title {
+          color: white;
+          font-size: 16px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 1.2;
+          text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+          font-family: 'Georgia', serif;
+        }
+        
+        .book::after {
+          content: " ";
+          display: block;
+          opacity: 0;
+          width: 180px;
+          height: 255px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transition: all .3s ease;
+          pointer-events: none;
+        }
+        
+        .book::before {
+          content: " ";
+          z-index: 999;
+          display: block;
+          width: 20px;
+          height: 100px;
+          opacity: 0;
+          position: absolute;
+          top: -12px;
+          right: 8px;
+          transition: all .25s;
+          background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAABhCAYAAABh23lYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHCSURBVHgB7dxPTsJAHMXxN7Xu3UhigobxJHACvQFwAr2BcgO8AZxE7uGiDZiQyEIW7oSOUyKbKgLS8u+9b9JNF818fum0XdWUhy9VEDZBGIdBGD6DsFM3bQYgTnjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNaEZ0141oRnTXjWhGdNeNZ2hR/7o+UcmnCIsaNCbLcU/RR8oB1bO/4+17l8ixoGeIBBBVvMXI0ih+L7Df2j8iiqnvgh+AVVUXDOTZvF4tNb2qC7DJ1tNgSDO78tblFQxeE92l+0NSjZDjaoMowqyYl7hDF15JzL+x+YHtxLgFq/ZO2m8LT4wsb90nUjmMD61XaRc7ng5+jBua29ntsecq6oIWyELxqdLe8h/GvPp+h0T28D/FezZ8Ip7pHgZt3X5NoPvH1BZ5sNIUTDL7C+6hBWxxt0gk+00tsOe96qH0zL8GO4pBtMg/YhoLMtG8Ii/EpfY4fSoiFk8UeFzpYdwhz/jiNGZ0uHEBjUEzftohJFZyAsdX8BM0/amLC3spYAAAAASUVORK5CYII=');
+          background-size: 16px;
+          background-repeat: no-repeat;
+          pointer-events: none;
+        }
+        
+        .book:hover {
+          transform: rotateY(-28deg) rotateZ(-2deg) scale(1.02);
+          -webkit-backface-visibility: hidden;
+          box-shadow: 1px 3px 2px #353d85, 20px 8px 0 #525dc4;
+        }
+        
+        .book:hover::after {
+          opacity: 1;
+          background: linear-gradient(-180deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, 0) 60%);
+        }
+        
+        .book:hover::before {
+          transform: translateY(9px);
+          opacity: 1;
+        }
+        
+        .selected-book {
+          transform: rotateY(-15deg) rotateZ(-1deg) scale(1.05);
+          box-shadow: 1px 3px 2px #353d85, 20px 8px 0 #525dc4;
+        }
+        
+        .selected-book::after {
+          opacity: 0.7;
+          background: linear-gradient(-180deg, rgba(255, 255, 255, .15) 0%, rgba(255, 255, 255, 0) 60%);
+        }
+      `}</style>
+      
+      <section className="w-full mx-auto px-12 sm:px-16 lg:px-24 mt-12 mb-12">
+        <h2 className="animate-glow text-4xl font-semibold mb-8 text-center text-transparent bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text">
+          Skills
+        </h2>
 
-      {!showList ? (
-        <div
-          ref={containerRef}
-          onClick={() => setFalling(true)}
-          className="w-full"
-          style={{ height: `${400 * scale}px`, cursor: 'pointer', borderRadius: '0.75rem', overflow: 'hidden' }}
-        >
-          <Canvas camera={{ position: [0, 4 * scale, 14 * scale], fov: 50 }} shadows>
-            <ambientLight intensity={0.6} />
-            <directionalLight position={[5 * scale, 10 * scale, 5 * scale]} intensity={1.2} castShadow />
-            {falling ? (
-              <Physics gravity={[0, -9.81, 0]}>
-                <Ground />
-                <BrickWall falling scale={scale} />
-              </Physics>
-            ) : (
-              <BrickWall falling={false} scale={scale} />
-            )}
-          </Canvas>
-        </div>
-      ) : (
-        <div className="w-full flex items-center justify-center rounded-xl overflow-hidden" style={{ height: `${400 * scale}px` }}>
-          <div className="flex flex-wrap justify-center gap-3">
-            {skills.map((skill, i) => (
-              <Button
-                key={i}
-                variant="secondary"
-                className="border border-white bg-gray-800/40 hover:bg-gray-800/60 text-gray-200"
-              >
-                {skill}
-              </Button>
-            ))}
+        <div className="w-full flex flex-col items-center justify-center rounded-xl overflow-hidden">
+          {/* Book container */}
+          <div className="w-full max-w-6xl mb-8">
+            <div className="book-container">
+              <div className="box-out">
+                {skillCategories.map((category, index) => (
+                  <div
+                    key={category.id}
+                    onClick={() => handleCategoryClick(category)}
+                    className={`book ${selectedCategory?.id === category.id ? 'selected-book' : ''}`}
+                  >
+                    <div className="book-title">
+                      {category.name}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
+
+          {/* Skills displayed only for selected category */}
+          {selectedCategory && (
+            <div className="w-full max-w-6xl">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold text-white mb-2">
+                  {selectedCategory.name}
+                </h3>
+                <p className="text-gray-400">
+                  {selectedCategory.description}
+                </p>
+              </div>
+              
+              <div className="flex flex-wrap justify-center gap-3">
+                {selectedCategory.skills.map((skill, index) => (
+                  <Button
+                    key={index}
+                    variant="secondary"
+                    className="border border-white bg-gray-800/40 hover:bg-gray-800/60 text-gray-200"
+                  >
+                    {skill}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      )}
-      <div className="animate-glow text-center text-lg mt-4">
-        Click above! 
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

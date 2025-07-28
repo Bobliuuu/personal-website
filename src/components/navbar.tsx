@@ -22,10 +22,10 @@ export default function Navbar() {
   }
 
   return (
-    <header className="py-6 fixed top-0 left-0 w-full z-50 bg-black">
+    <header className="py-6 fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-sm border-b border-white/20">
       <div className="max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-24 flex justify-between items-center relative">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <span className="text-2xl font-bold bg-gradient-to-r from-gray-500 via-gray-100 via-50% to-gray-500 bg-clip-text text-transparent">
+          <span className="text-2xl font-bold bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
             Jerry Zhu
           </span>
         </Link>
@@ -41,12 +41,12 @@ export default function Navbar() {
               <span className="sr-only">Open menu</span>
             </Button>
             {menuOpen && (
-              <div className="absolute right-4 top-16 bg-black border border-gray-700 rounded-lg shadow-lg flex flex-col items-end z-50 p-4 space-y-2">
+              <div className="absolute right-4 top-16 bg-black/90 backdrop-blur-sm border border-gray-700 rounded-lg shadow-lg flex flex-col items-end z-50 p-4 space-y-2">
                 {navItems.map((item, index) => (
                   <button
                     key={index}
                     onClick={() => scrollToSection(item.id)}
-                    className="text-white text-base py-1 px-4 rounded hover:bg-gray-800 w-full text-right"
+                    className="text-white text-base py-1 px-4 rounded hover:bg-gray-800/50 w-full text-right"
                   >
                     {item.title}
                   </button>
@@ -69,7 +69,7 @@ export default function Navbar() {
               <button
                 key={index}
                 onClick={() => scrollToSection(item.id)}
-                className="text-foreground/80 transition-colors hover:text-foreground"
+                className="text-gray-300 transition-colors hover:text-white"
               >
                 {item.title}
               </button>
@@ -87,6 +87,8 @@ export default function Navbar() {
           </nav>
         </div>
       </div>
+      {/* White gradient line at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
     </header>
   )
 }

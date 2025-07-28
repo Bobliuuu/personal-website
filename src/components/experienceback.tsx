@@ -5,12 +5,10 @@ import $ from 'jquery';
 
 export default function RippleExperience() {
   useEffect(() => {
-    // Attach jQuery to window (required by jquery.ripples)
     if (typeof window !== 'undefined') {
       (window as any).jQuery = $;
       (window as any).$ = $;
 
-      // Dynamically load the plugin script
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/gh/sirxemic/jquery.ripples/jquery.ripples-min.js';
       script.async = true;
@@ -36,7 +34,14 @@ export default function RippleExperience() {
       className="ripple-container relative w-screen h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/underwater.jpg')" }}
     >
-      <h1 className="absolute inset-0 z-10 flex items-center justify-center text-6xl text-white font-bold animate-glow pointer-events-none">
+      {/* Top gradient fade */}
+      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-[#3bf1f7] via-transparent to-transparent pointer-events-none z-20" />
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none z-20" />
+
+      {/* Centered heading */}
+      <h1 className="absolute inset-0 z-30 flex items-center justify-center text-6xl text-white font-bold animate-glow pointer-events-none">
         experiences
       </h1>
     </div>
