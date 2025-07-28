@@ -35,12 +35,24 @@ export default function Front() {
         className="relative w-screen flex items-center justify-center overflow-hidden overflow-x-hidden"
         style={{ height: `calc(100vh - ${navbarHeight}px)`, marginTop: `${navbarHeight}px` }}
       >
-        <img
-          src="/forest2.jpg"
-          alt="Forest background"
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-40"
-        />
+        >
+          <source src="/video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        
+        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/40" />
+        
+        {/* Fading gradient overlay for smooth transition to next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#183c1e] to-transparent z-10"></div>
+        
         {/* You can add overlay content here if needed */}
         {/* Down Arrow Button */}
         <button
@@ -56,7 +68,7 @@ export default function Front() {
             }
           }}
           className="absolute z-20 bg-transparent hover:bg-transparent rounded-full p-2 transition-all animate-bounce-custom glow-button"
-          style={{ bottom: '25%' }}
+          style={{ bottom: '20%' }}
           aria-label="Scroll down"
         >
           <ChevronDownIcon className="w-8 h-8 sm:w-10 sm:h-10 text-cyan-400 animate-bounce-custom" />
