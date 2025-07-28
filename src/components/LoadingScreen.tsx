@@ -57,11 +57,6 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
     <div
       className={`fixed inset-0 z-[9999] flex flex-col justify-center items-center bg-black transition-opacity duration-800 ${fade ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
     >
-      {/* Top bar */}
-      <div className="absolute top-6 left-8 right-8 flex justify-between w-[calc(100%-4rem)] text-gray-200 text-lg font-sans select-none">
-        <span>Loading your experience...|</span>
-        <span className="text-gray-800">{progress}%</span>
-      </div>
       {/* Centered text */}
       <div className="flex-1 flex items-center justify-center w-full">
         <span

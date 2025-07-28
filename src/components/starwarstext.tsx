@@ -25,7 +25,7 @@ function StarWarsCrawl({ scale }: StarWarsCrawlProps) {
   return (
     <group ref={group} rotation={[-Math.PI / 6, 0, 0]} scale={[scale, scale, scale]}>
       {/* Title Text */}
-      <group position={[-4, 4, 0]}>
+      <group position={[-4, 2, 0]}>
         <Text3D
           font="/starjedi_regular.json"
           size={1}
@@ -39,22 +39,6 @@ function StarWarsCrawl({ scale }: StarWarsCrawlProps) {
           onPointerOut={() => setHovered(false)}
         >
           jerry zhu
-          <meshStandardMaterial color={hovered ? "#fffbe1" : "#ffe81f"} emissive={hovered ? "#ffe81f" : "#000"} emissiveIntensity={hovered ? 0.7 : 0} />
-        </Text3D>
-        <Text3D
-          font="/starjedi_regular.json"
-          size={1}
-          height={0.2}
-          bevelEnabled
-          bevelThickness={0.05}
-          bevelSize={0.02}
-          bevelOffset={0}
-          bevelSegments={5}
-          position={[2.5, -3, 0]}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
-        >
-          SWE
           <meshStandardMaterial color={hovered ? "#fffbe1" : "#ffe81f"} emissive={hovered ? "#ffe81f" : "#000"} emissiveIntensity={hovered ? 0.7 : 0} />
         </Text3D>
       </group>
