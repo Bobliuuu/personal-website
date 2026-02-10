@@ -5,7 +5,7 @@ import { Moon, Sun, Menu } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useState } from "react"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/atoms/ui/button"
 import { navItems } from "@/constants/navbar"
 import { footerInfo } from "@/constants/footer"
 

@@ -41,14 +41,14 @@ export default function Front() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/60" />
         
         {/* Fading gradient overlay for smooth transition to next section */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#183c1e] to-transparent z-10"></div>

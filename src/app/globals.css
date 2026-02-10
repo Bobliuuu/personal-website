@@ -6,33 +6,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --background: 240 10% 98%;
+    --foreground: 222.2 84% 4.9%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card: 240 10% 98%;
+    --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
+    --popover: 240 10% 98%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
 
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
 
@@ -48,50 +48,38 @@
   }
 
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-[hsl(var(--border))];
-  }
-  body {
-    @apply bg-background text-foreground;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow-x: hidden;
   }
 }
 
@@ -107,6 +95,60 @@
   }
 }
 
+/* Light mode adjustments - ONLY for sections after experiences */
+:root:not(.dark) #projects,
+:root:not(.dark) #contributions,
+:root:not(.dark) #contact {
+  background-color: #f8f9fa;
+}
+
+:root:not(.dark) #projects .text-white,
+:root:not(.dark) #contributions .text-white,
+:root:not(.dark) #contact .text-white {
+  color: #1a1a1a !important;
+}
+
+:root:not(.dark) #projects .text-gray-300,
+:root:not(.dark) #projects .text-gray-400,
+:root:not(.dark) #contributions .text-gray-300,
+:root:not(.dark) #contributions .text-gray-400,
+:root:not(.dark) #contact .text-gray-300,
+:root:not(.dark) #contact .text-gray-400 {
+  color: #4a5568 !important;
+}
+
+:root:not(.dark) #projects .bg-black,
+:root:not(.dark) #projects .bg-gray-900,
+:root:not(.dark) #projects .bg-gray-800,
+:root:not(.dark) #contributions .bg-black,
+:root:not(.dark) #contributions .bg-gray-900,
+:root:not(.dark) #contributions .bg-gray-800,
+:root:not(.dark) #contact .bg-black,
+:root:not(.dark) #contact .bg-gray-900,
+:root:not(.dark) #contact .bg-gray-800 {
+  background-color: #ffffff !important;
+}
+
+:root:not(.dark) #projects .border-white\/10,
+:root:not(.dark) #projects .border-white\/20,
+:root:not(.dark) #contributions .border-white\/10,
+:root:not(.dark) #contributions .border-white\/20,
+:root:not(.dark) #contact .border-white\/10,
+:root:not(.dark) #contact .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes frisbee {
   0% { left: 10%; top: 10px; }
   50% { left: 70%; top: -20px; }
@@ -117,11 +159,11 @@
 }
 
 @keyframes frisbee-arc {
-  0%   { left: 0vw;   top: 40px;   opacity: 1; }
-  25%  { left: 15vw;  top: -40px;  opacity: 1; }
-  50%  { left: 30vw;  top: -100px; opacity: 1; }
-  75%  { left: 45vw;  top: -40px;  opacity: 1; }
-  100% { left: 60vw; top: 40px;   opacity: 0; }
+  0%   { left: -10vw;  top: 40px;   opacity: 1; }
+  25%  { left: 20vw;   top: -40px;  opacity: 1; }
+  50%  { left: 50vw;   top: -100px; opacity: 1; }
+  75%  { left: 80vw;   top: -40px;  opacity: 1; }
+  100% { left: 110vw;  top: 40px;   opacity: 0; }
 }
 .frisbee-arc {
   animation: frisbee-arc 4s cubic-bezier(0.6, 0.05, 0.4, 1) 1;

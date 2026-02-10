@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { useBox, Physics } from "@react-three/cannon";
 import { Text } from "@react-three/drei";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/atoms/ui/button";
 import Image from "next/image";
 
 const skills = [

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function LoadingScreen({ onDone }: { onDone: () => void }) {
+export default function LoadingScreen({ onDone }: { onDone?: () => void }) {
   const [progress, setProgress] = useState(0);
   const [fade, setFade] = useState(false);
 

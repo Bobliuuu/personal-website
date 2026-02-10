@@ -1,21 +1,23 @@
 "use client"
 
 import { useEffect, useState, lazy } from "react"
-import Navbar from "@/components/navbar"
-import ParticlesBackground from "@/components/particles"
-import LoadingScreen from "@/components/LoadingScreen"
+import Navbar from "@/components/molecules/navbar"
+import ParticlesBackground from "@/components/atoms/particles"
+import LoadingScreen from "@/components/atoms/LoadingScreen"
 
-const Front = lazy(() => import("@/components/front"))
-const StarWarsText = lazy(() => import("@/components/starwarstext"))
-const Hero = lazy(() => import("@/components/hero"))
-const Education = lazy(() => import("@/components/education"))
-const Skills = lazy(() => import("@/components/skills"))
-const RippleExperience = lazy(() => import("@/components/experienceback"))
-const Experience = lazy(() => import("@/components/experience"))
-const ProjectsBack = lazy(() => import("@/components/projectsback"))
-const Projects = lazy(() => import("@/components/projects"))
-const Contact = lazy(() => import("@/components/contact"))
-const Socials = lazy(() => import("@/components/socials"))
+const Front = lazy(() => import("@/components/organisms/front"))
+const StarWarsText = lazy(() => import("@/components/organisms/starwarstext"))
+const Hero = lazy(() => import("@/components/organisms/hero"))
+const Education = lazy(() => import("@/components/organisms/education"))
+const Skills = lazy(() => import("@/components/organisms/skills"))
+const RippleExperience = lazy(() => import("@/components/atoms/experienceback"))
+const Experience = lazy(() => import("@/components/organisms/experience"))
+const Achievements = lazy(() => import("@/components/organisms/achievements"))
+const ProjectsBack = lazy(() => import("@/components/atoms/projectsback"))
+const Projects = lazy(() => import("@/components/organisms/projects"))
+const Contributions = lazy(() => import("@/components/organisms/contributions"))
+const Contact = lazy(() => import("@/components/organisms/contact"))
+const Socials = lazy(() => import("@/components/molecules/socials"))
 
 export default function Page() {
   const [loading, setLoading] = useState(true)
@@ -61,12 +63,14 @@ export default function Page() {
         <div className="bg-gradient-to-b from-black via-[#002b3a] to-black">
           <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24">
             <Experience />
+            <Achievements />
           </div>
         </div>
         <ProjectsBack />
         <div className="bg-gradient-to-b from-[#0d1f2d] to-black">
           <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24">
             <Projects />
+            <Contributions />
           </div>
         </div>
         <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/atoms/ui/button";
 import { skillCategories } from "@/constants/skills";
 
 export default function Skills() {
@@ -149,9 +149,6 @@ export default function Skills() {
                 <h3 className="text-2xl font-semibold text-white mb-2">
                   {selectedCategory.name}
                 </h3>
-                <p className="text-gray-400">
-                  {selectedCategory.description}
-                </p>
               </div>
               
               <div className="flex flex-wrap justify-center gap-3">

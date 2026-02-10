@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/atoms/ui/button";
+import { Input } from "@/components/atoms/ui/input";
+import { Textarea } from "@/components/atoms/ui/textarea";
 
 export default function Contact() {
   return (
@@ -18,19 +18,19 @@ export default function Contact() {
           </p>
         </div>
         {/* Right: Form */}
-        <form className="flex flex-col gap-6 w-full max-w-md mx-auto">
+        <form className="flex flex-col gap-5 w-full max-w-lg mx-auto">
           <Input
             placeholder="Name"
-            className="bg-black/60 border border-gray-500/40 rounded-lg px-5 py-3 text-white font-inter text-base focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 shadow-md transition-all duration-200"
+            className="h-12 w-full bg-black/60 border border-white/30 rounded-lg px-4 py-3 text-lg text-white placeholder:text-gray-400 placeholder:font-normal leading-relaxed focus:border-white focus:ring-2 focus:ring-white/30 shadow-md transition-all duration-200 hover:bg-gray-800/40"
           />
           <Input
             type="email"
             placeholder="Email"
-            className="bg-black/60 border border-gray-500/40 rounded-lg px-5 py-3 text-white font-inter text-base focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 shadow-md transition-all duration-200"
+            className="h-12 w-full bg-black/60 border border-white/30 rounded-lg px-4 py-3 text-lg text-white placeholder:text-gray-400 placeholder:font-normal leading-relaxed focus:border-white focus:ring-2 focus:ring-white/30 shadow-md transition-all duration-200 hover:bg-gray-800/40"
           />
           <Textarea
             placeholder="Message"
-            className="bg-black/60 border border-gray-500/40 rounded-lg px-5 py-3 text-white font-inter text-base min-h-[140px] focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 shadow-md transition-all duration-200"
+            className="min-h-[180px] w-full py-4 px-4 bg-black/60 border border-white/30 rounded-lg text-lg text-white placeholder:text-gray-400 placeholder:font-normal leading-relaxed focus:border-white focus:ring-2 focus:ring-white/30 shadow-md transition-all duration-200 hover:bg-gray-800/40 resize-y"
           />
           <Button
             variant="ghost"

@@ -6,8 +6,8 @@ import { Suspense, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { useRouter } from "next/navigation";
 
-type StarWarsCrawlProps = { scale: number };
-function StarWarsCrawl({ scale }: StarWarsCrawlProps) {
+type StarWarsCrawlProps = { scale: number; titleSize: number };
+function StarWarsCrawl({ scale, titleSize }: StarWarsCrawlProps) {
   const group = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
   const [hoveredLeft, setHoveredLeft] = useState(false);
@@ -28,22 +28,26 @@ function StarWarsCrawl({ scale }: StarWarsCrawlProps) {
       <group position={[-4, 2, 0]}>
         <Text3D
           font="/starjedi_regular.json"
-          size={1}
-          height={0.2}
+          size={titleSize}
+          height={0.17}
           bevelEnabled
-          bevelThickness={0.05}
-          bevelSize={0.02}
+          bevelThickness={0.04}
+          bevelSize={0.015}
           bevelOffset={0}
           bevelSegments={5}
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
         >
           jerry zhu
-          <meshStandardMaterial color={hovered ? "#fffbe1" : "#ffe81f"} emissive={hovered ? "#ffe81f" : "#000"} emissiveIntensity={hovered ? 0.7 : 0} />
+          <meshStandardMaterial 
+            color={hovered ? "#fffbe1" : "#ffe81f"} 
+            emissive={hovered ? "#ffe81f" : "#000"} 
+            emissiveIntensity={hovered ? 0.55 : 0} 
+          />
         </Text3D>
       </group>
 
-      {/* Resume Button */}
+      {/* Resume Button - Primary (Lighter Yellow) */}
       <group position={[-3.5, -3.5, -1]}>
         <mesh
           castShadow
@@ -52,21 +56,21 @@ function StarWarsCrawl({ scale }: StarWarsCrawlProps) {
           onPointerOver={() => { document.body.style.cursor = "pointer"; setHoveredLeft(true); }}
           onPointerOut={() => { document.body.style.cursor = "auto"; setHoveredLeft(false); }}
         >
-          <boxGeometry args={[3, 0.7, 0.4]} />
-          <meshStandardMaterial color="#888" />
+          <boxGeometry args={[3, 0.6, 0.3]} />
+          <meshStandardMaterial color={hoveredLeft ? "#666" : "#555"} />
         </mesh>
         <Text3D
         font="/starjedi_regular.json"
         size={0.45}
-        height={0.1}
-        position={[-1.15, -0.35, 0.5]}
+        height={0.08}
+        position={[-1.15, -0.3, 0.4]}
         >
         resume
-        <meshStandardMaterial color={hoveredLeft ? "#fffbe1" : "#ffe81f"} emissive={hoveredLeft ? "#ffe81f" : "#000"} emissiveIntensity={hoveredLeft ? 0.7 : 0} />
+        <meshStandardMaterial color={hoveredLeft ? "#888" : "#f9facd"} emissive={hoveredLeft ? "#ffeb3b" : "#000"} emissiveIntensity={hoveredLeft ? 0.5 : 0} />
         </Text3D>
       </group>
 
-      {/* Interactive Button */}
+      {/* Interactive Button - Secondary (Gray/Outline) */}
       <group position={[4.5, -3.5, -1]}>
         <mesh
           castShadow
@@ -75,17 +79,25 @@ function StarWarsCrawl({ scale }: StarWarsCrawlProps) {
           onPointerOver={() => { document.body.style.cursor = "pointer"; setHoveredRight(true); }}
           onPointerOut={() => { document.body.style.cursor = "auto"; setHoveredRight(false); }}
         >
-          <boxGeometry args={[5, 0.7, 0.4]} />
-          <meshStandardMaterial color="#888" />
+          <boxGeometry args={[5, 0.6, 0.3]} />
+          <meshStandardMaterial 
+            color={hoveredRight ? "#666" : "#555"} 
+            transparent
+            opacity={hoveredRight ? 0.9 : 0.7}
+          />
         </mesh>
         <Text3D
         font="/starjedi_regular.json"
         size={0.45}
-        height={0.1}
-        position={[-2.3, -0.35, 0.5]}
+        height={0.08}
+        position={[-2.3, -0.3, 0.4]}
         >
         interactive
-        <meshStandardMaterial color={hoveredRight ? "#fffbe1" : "#ffe81f"} emissive={hoveredRight ? "#ffe81f" : "#000"} emissiveIntensity={hoveredRight ? 0.7 : 0} />
+        <meshStandardMaterial 
+          color={hoveredRight ? "#ccc" : "#999"} 
+          emissive={hoveredRight ? "#666" : "#000"} 
+          emissiveIntensity={hoveredRight ? 0.3 : 0} 
+        />
         </Text3D>
       </group>
     </group>
@@ -95,12 +107,23 @@ function StarWarsCrawl({ scale }: StarWarsCrawlProps) {
 export default function StarWarsText() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const [titleSize, setTitleSize] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
       if (wrapperRef.current) {
         const width = wrapperRef.current.offsetWidth;
         setScale(width / 2000);
+        
+        // Calculate responsive title size equivalent to clamp(2.25rem, 6vw, 4.5rem)
+        // Convert rem to pixels (assuming 16px base): 2.25rem = 36px, 4.5rem = 72px
+        // 6vw = 6% of viewport width
+        const minSize = 36; // 2.25rem
+        const preferredSize = width * 0.06; // 6vw
+        const maxSize = 72; // 4.5rem
+        const clampedSize = Math.max(minSize, Math.min(preferredSize, maxSize));
+        // Convert to 3D scale (original size was 1, which corresponds to ~72px at base scale)
+        setTitleSize(clampedSize / 72);
       }
     };
     window.addEventListener("resize", handleResize);
@@ -126,7 +149,7 @@ export default function StarWarsText() {
         <ambientLight intensity={1} />
         <directionalLight position={[0, 10, 10]} intensity={2} />
         <Suspense fallback={null}>
-          <StarWarsCrawl scale={scale} />
+          <StarWarsCrawl scale={scale} titleSize={titleSize} />
         </Suspense>
       </Canvas>
     </div>
