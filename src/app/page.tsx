@@ -1,12 +1,17 @@
 "use client"
 
 import { useEffect, useState, lazy, Suspense } from "react"
+import dynamic from "next/dynamic"
 import Navbar from "@/components/molecules/navbar"
 import ParticlesBackground from "@/components/atoms/particles"
 import LoadingScreen from "@/components/atoms/LoadingScreen"
 
 const Front = lazy(() => import("@/components/organisms/front"))
-const StarWarsText = lazy(() => import("@/components/organisms/starwarstext"))
+// 3D / R3F must be client-only (avoid SSR/prerender runtime issues)
+const StarWarsText = dynamic(() => import("@/components/organisms/starwarstext"), {
+  ssr: false,
+  loading: () => <div className="w-full h-20" />,
+})
 const Hero = lazy(() => import("@/components/organisms/hero"))
 const Education = lazy(() => import("@/components/organisms/education"))
 const Skills = lazy(() => import("@/components/organisms/skills"))

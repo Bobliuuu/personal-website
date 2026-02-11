@@ -23,7 +23,8 @@ function StarWarsCrawl({ scale, titleSize }: StarWarsCrawlProps) {
   });
 
   return (
-    <group ref={group} rotation={[-Math.PI / 6, 0, 0]} scale={[scale, scale, scale]}>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- duplicate @types/three versions make Group ref types incompatible
+    <group ref={group as any} rotation={[-Math.PI / 6, 0, 0]} scale={[scale, scale, scale]}>
       {/* Title Text */}
       <group position={[-4, 2, 0]}>
         <Text3D

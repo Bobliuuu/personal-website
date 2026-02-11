@@ -2,7 +2,7 @@
 import { Canvas } from "@react-three/fiber";
 import { useBox, Physics } from "@react-three/cannon";
 import { Text } from "@react-three/drei";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/atoms/ui/button";
 import Image from "next/image";
 
@@ -41,7 +41,8 @@ function JengaBrick({
   }, [api, readyToFall]);
 
   return (
-    <mesh ref={ref} castShadow receiveShadow>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- useBox returns Object3D ref; mesh expects Mesh; cannon/fiber/three types don't align
+    <mesh ref={ref as any} castShadow receiveShadow>
       <boxGeometry args={[2, 0.5, 0.6]} />
       <meshStandardMaterial color="#888" />
       <Text
