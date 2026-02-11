@@ -51,6 +51,7 @@ export default function Education() {
                         src={edu.logo}
                         alt={`${edu.institution} logo`}
                         fill
+                        sizes="56px"
                         className="object-contain rounded-lg"
                       />
                     </div>

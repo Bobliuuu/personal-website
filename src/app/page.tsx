@@ -5,12 +5,13 @@ import dynamic from "next/dynamic"
 import Navbar from "@/components/molecules/navbar"
 import ParticlesBackground from "@/components/atoms/particles"
 import LoadingScreen from "@/components/atoms/LoadingScreen"
+import { StarWarsErrorBoundary } from "@/components/atoms/StarWarsErrorBoundary"
 
 const Front = lazy(() => import("@/components/organisms/front"))
-// 3D / R3F must be client-only (avoid SSR/prerender runtime issues)
+// R3F Canvas must never run on server — dynamic with ssr: false prevents server import
 const StarWarsText = dynamic(() => import("@/components/organisms/starwarstext"), {
   ssr: false,
-  loading: () => <div className="w-full h-20" />,
+  loading: () => <div className="min-h-[100vh] w-full" aria-hidden />,
 })
 const Hero = lazy(() => import("@/components/organisms/hero"))
 const Education = lazy(() => import("@/components/organisms/education"))
@@ -62,9 +63,11 @@ export default function Page() {
           <Front />
         </Suspense>
         
-        <Suspense fallback={<SectionLoader />}>
-          <StarWarsText />
-        </Suspense>
+        <StarWarsErrorBoundary>
+          <Suspense fallback={<SectionLoader />}>
+            <StarWarsText />
+          </Suspense>
+        </StarWarsErrorBoundary>
         
         <div id="hero-education-skills" className="bg-gradient-to-b from-[#183c1e] via-[#0f2a14] to-[#3bf1f7]">
           <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24">

@@ -89,6 +89,7 @@ export default function Hero() {
           width={360}
           height={360}
           className="w-full h-auto object-contain"
+          style={{ width: "auto", height: "auto" }}
           loading="lazy"
           priority={false}
         />

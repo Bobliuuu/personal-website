@@ -75,7 +75,7 @@ export default function ProjectsBack() {
 
       {/* Mountains - full width and height */}
       <div className="absolute inset-0 w-full h-full z-30">
-        <Image src="/mountain.png" alt="Mountains" fill className="object-cover" priority />
+        <Image src="/mountain.png" alt="Mountains" fill sizes="100vw" className="object-cover" priority />
       </div>
     </div>
   );

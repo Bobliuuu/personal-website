@@ -51,6 +51,7 @@ function ProjectCard({ project, priority }: { project: Project; priority: boolea
               src={project.image}
               alt={project.title}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover opacity-30"
               priority={priority}
               onError={(e) => {
