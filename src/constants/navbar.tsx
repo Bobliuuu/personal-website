@@ -9,12 +9,16 @@ export type NavItem = {
 
 export const navItems: NavItem[] = [
   {
+    title: "Experiences",
+    id: "experience-section",
+  },
+  {
     title: "Projects",
     id: "projects",
   },
   {
-    title: "Experiences",
-    id: "experiences",
+    title: "Achievements",
+    id: "achievements",
   },
   {
     title: "Contact",

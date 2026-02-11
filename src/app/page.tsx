@@ -87,13 +87,10 @@ export default function Page() {
           <RippleExperience />
         </Suspense>
         
-        <div id="experience-section" className="bg-gradient-to-b from-black via-[#002b3a] to-black">
+        <div id="experience-section" className="bg-gradient-to-b from-black via-[#002b3a] to-black scroll-mt-24">
           <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24">
             <Suspense fallback={<SectionLoader />}>
               <Experience />
-            </Suspense>
-            <Suspense fallback={<SectionLoader />}>
-              <Achievements />
             </Suspense>
           </div>
         </div>
@@ -106,6 +103,9 @@ export default function Page() {
           <div className="relative w-full max-w-screen-xl mx-auto px-12 sm:px-16 lg:px-24">
             <Suspense fallback={<SectionLoader />}>
               <Projects />
+            </Suspense>
+            <Suspense fallback={<SectionLoader />}>
+              <Achievements />
             </Suspense>
             <Suspense fallback={<SectionLoader />}>
               <Contributions />

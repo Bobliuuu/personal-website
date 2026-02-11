@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export default function Achievements() {
   return (
-    <section className="w-full px-6 sm:px-12 lg:px-24 pb-10 pt-[100px]">
+    <section id="achievements" className="w-full px-6 sm:px-12 lg:px-24 pb-10 pt-[100px] scroll-mt-24">
       <h2 className="text-4xl sm:text-4xl lg:text-5xl font-medium mb-8 animate-glow">
         <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
           Achievements

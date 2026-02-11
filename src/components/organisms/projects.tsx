@@ -12,9 +12,8 @@ const MotionDiv = motion.div
 
 export default function Projects() {
   return (
-    <section id="projects" className="w-full flex flex-col items-center justify-center py-24">
+    <section id="projects" className="w-full flex flex-col items-center justify-center py-24 scroll-mt-24">
       <div className="w-full max-w-[1800px] px-6 sm:px-8 lg:px-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-12">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} priority={index < 3} />
