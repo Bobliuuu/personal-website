@@ -1,0 +1,11 @@
+# Caddyfile for personal-website (Next.js standalone)
+# Replace yourdomain.com with your domain or use :80 for HTTP only.
+
+yourdomain.com {
+    reverse_proxy 127.0.0.1:3000
+}
+
+# Or HTTP only (no TLS), e.g. for local or internal:
+# :80 {
+#     reverse_proxy 127.0.0.1:3000
+# }

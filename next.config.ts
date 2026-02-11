@@ -11,8 +11,14 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
 
+  async redirects() {
+    return [{ source: '/resume', destination: '/ZhuJerryResume.pdf', permanent: false }];
+  },
   async rewrites() {
-    return [{ source: '/favicon.ico', destination: '/frisbee.png' }];
+    return [
+      { source: '/favicon.ico', destination: '/frisbee.png' },
+      { source: '/sitemap.xml', destination: '/api/sitemap' },
+    ];
   },
 
   images: {

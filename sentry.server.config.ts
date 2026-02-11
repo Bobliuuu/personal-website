@@ -18,6 +18,6 @@ Sentry.init({
   environment: process.env.NODE_ENV,
   
   // Release version
-  release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+  release: process.env.NEXT_PUBLIC_BUILD_ID ?? process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
 });
 */

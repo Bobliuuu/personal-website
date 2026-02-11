@@ -3,7 +3,7 @@
 import { Chip } from "../ui";
 import { useInteractiveStore } from "@/lib/interactive-store";
 
-const BUILD_HASH = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "local";
+const BUILD_HASH = process.env.NEXT_PUBLIC_BUILD_ID?.slice(0, 7) ?? process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "local";
 
 export function TopStatusBar() {
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone ?? "UTC";
