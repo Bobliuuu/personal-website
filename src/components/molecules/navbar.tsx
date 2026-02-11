@@ -7,7 +7,6 @@ import { useState } from "react"
 
 import { Button } from "@/components/atoms/ui/button"
 import { navItems } from "@/constants/navbar"
-import { footerInfo } from "@/constants/footer"
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
@@ -37,51 +36,76 @@ export default function Navbar() {
               className="ml-2"
               onClick={() => setMenuOpen((open) => !open)}
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-7 w-7" />
               <span className="sr-only">Open menu</span>
             </Button>
             {menuOpen && (
               <div className="absolute right-4 top-16 bg-black/90 backdrop-blur-sm border border-gray-700 rounded-lg shadow-lg flex flex-col items-end z-50 p-4 space-y-2">
-                {navItems.map((item, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollToSection(item.id)}
-                    className="text-white text-base py-1 px-4 rounded hover:bg-gray-800/50 w-full text-right"
-                  >
-                    {item.title}
-                  </button>
-                ))}
+                {navItems.map((item, index) =>
+                  item.href ? (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white text-base py-1 px-4 rounded hover:bg-gray-800/50 w-full text-right block"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  ) : (
+                    <button
+                      key={index}
+                      onClick={() => scrollToSection(item.id)}
+                      className="text-white text-base py-1 px-4 rounded hover:bg-gray-800/50 w-full text-right"
+                    >
+                      {item.title}
+                    </button>
+                  )
+                )}
                 <Button
                   variant="ghost"
                   size="icon"
                   className="ml-2"
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 >
-                  <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                  <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                  <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                   <span className="sr-only">Toggle theme</span>
                 </Button>
               </div>
             )}
           </div>
           <nav className="hidden sm:flex items-center space-x-6 text-sm font-medium">
-            {navItems.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => scrollToSection(item.id)}
-                className="text-gray-300 transition-colors hover:text-white"
-              >
-                {item.title}
-              </button>
-            ))}
+            {navItems.map((item, index) =>
+              item.href ? (
+                <Link
+                  key={index}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 transition-colors hover:text-white"
+                >
+                  {item.title}
+                </Link>
+              ) : (
+                <button
+                  key={index}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-gray-300 transition-colors hover:text-white"
+                >
+                  {item.title}
+                </button>
+              )
+            )}
             <Button
               variant="ghost"
               size="icon"
               className="ml-2"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">Toggle theme</span>
             </Button>
           </nav>

@@ -3,17 +3,30 @@
 import { useEffect } from 'react';
 import $ from 'jquery';
 
+// Extend Window interface for jQuery
+declare global {
+  interface Window {
+    jQuery: typeof $;
+    $: typeof $;
+  }
+}
+
+// Extend jQuery with ripples method
+interface JQueryRipples extends JQuery {
+  ripples(options?: { resolution?: number; dropRadius?: number; perturbance?: number } | string): JQuery;
+}
+
 export default function RippleExperience() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      (window as any).jQuery = $;
-      (window as any).$ = $;
+      window.jQuery = $;
+      window.$ = $;
 
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/gh/sirxemic/jquery.ripples/jquery.ripples-min.js';
       script.async = true;
       script.onload = () => {
-        $('.ripple-container').ripples({
+        ($('.ripple-container') as unknown as JQueryRipples).ripples({
           resolution: 512,
           dropRadius: 20,
           perturbance: 0.04,
@@ -24,7 +37,7 @@ export default function RippleExperience() {
 
     return () => {
       try {
-        $('.ripple-container').ripples('destroy');
+        ($('.ripple-container') as unknown as JQueryRipples).ripples('destroy');
       } catch {}
     };
   }, []);

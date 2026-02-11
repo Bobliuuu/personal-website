@@ -1,15 +1,29 @@
 import { Home, Github, Linkedin, Youtube, MessageCircle, BookOpen } from "lucide-react"
 
-// Custom X (Twitter) icon component
-const XIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="currentColor">
+// Custom X (Twitter) icon component - 30% smaller
+const XIcon = ({ className, size, ...props }: { className?: string; size?: number; [key: string]: any }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    width={size || 14}
+    height={size || 14}
+    className={className || "w-3.5 h-3.5"} 
+    fill="currentColor" 
+    {...props}
+  >
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 )
 
-// Custom Devpost icon component  
-const DevpostIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="currentColor">
+// Custom Devpost icon component - 30% smaller 
+const DevpostIcon = ({ className, size, ...props }: { className?: string; size?: number; [key: string]: any }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    width={size || 14}
+    height={size || 14}
+    className={className || "w-3.5 h-3.5"} 
+    fill="currentColor" 
+    {...props}
+  >
     <path d="M6.002 1.61L0 12.004L6.002 22.39h11.996L24 12.004L17.998 1.61zm1.593 4.084h3.947c3.605 0 6.276 1.695 6.276 6.31c0 4.436-3.21 6.302-6.456 6.302H7.595z"/>
   </svg>
 )

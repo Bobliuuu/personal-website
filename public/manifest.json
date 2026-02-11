@@ -1,0 +1,41 @@
+{
+  "name": "Jerry Zhu | Software Engineer",
+  "short_name": "Jerry Zhu",
+  "description": "Software Engineer @StackAdapt | CS @UWaterloo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/frisbee.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["technology", "portfolio", "business"],
+  "shortcuts": [
+    {
+      "name": "Projects",
+      "url": "/#projects",
+      "description": "View my projects"
+    },
+    {
+      "name": "Experience",
+      "url": "/#experience",
+      "description": "View my work experience"
+    },
+    {
+      "name": "Contact",
+      "url": "/#contact",
+      "description": "Get in touch"
+    }
+  ]
+}

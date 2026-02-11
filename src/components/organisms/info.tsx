@@ -26,14 +26,13 @@ function JengaBrick({
     position,
     rotation,
     args: [2, 0.5, 0.6],
-    type: "Static",
+    mass: 0,
   }));
 
   useEffect(() => {
     if (readyToFall) {
       // Set mass and apply impulse to simulate fall
       api.mass.set(1);
-      api.type.set("Dynamic");
       api.applyImpulse(
         [Math.random() * 2 - 1, 5 + Math.random() * 2, Math.random() * 2 - 1],
         [0, 0, 0]
@@ -70,7 +69,7 @@ function JengaTower({ readyToFall }: { readyToFall: boolean }) {
           const x = (i - 1) * 1.2;
           const y = layer * 0.7;
           const z = layer % 2 === 0 ? 0 : (i - 1) * 1.2;
-          const rot = layer % 2 === 0 ? [0, 0, 0] : [0, Math.PI / 2, 0];
+          const rot: [number, number, number] = layer % 2 === 0 ? [0, 0, 0] : [0, Math.PI / 2, 0];
           const skill = skills[skillIndex++];
           return (
             <JengaBrick

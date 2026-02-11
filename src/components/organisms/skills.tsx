@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/atoms/ui/button";
-import { skillCategories } from "@/constants/skills";
+import { skillCategories, type SkillCategory } from "@/constants/skills";
 
 export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState(skillCategories[0]);
@@ -127,7 +127,7 @@ export default function Skills() {
           <div className="w-full max-w-6xl mb-8">
             <div className="book-container">
               <div className="box-out">
-                {skillCategories.map((category, index) => (
+                {skillCategories.map((category) => (
                   <div
                     key={category.id}
                     onClick={() => handleCategoryClick(category)}

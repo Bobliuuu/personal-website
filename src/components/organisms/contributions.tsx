@@ -21,7 +21,7 @@ export default function Contributions() {
   }
 
   return (
-    <section className="w-full px-6 sm:px-12 lg:px-24 pb-10 pt-[100px]">
+    <section id="contributions" className="w-full px-6 sm:px-12 lg:px-24 pb-10 pt-[100px]">
       <h2 className="text-4xl sm:text-4xl lg:text-5xl font-medium mb-8 animate-glow">
         <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
           Other Contributions
@@ -50,11 +50,7 @@ export default function Contributions() {
                         {contribution.organization}
                       </h3>
                       {hasDetails && (
-                        <ChevronDownIcon
-                          className={`h-5 w-5 flex-shrink-0 text-gray-400 transition-transform duration-300 ease-out ${
-                            isExpanded ? "rotate-180" : ""
-                          }`}
-                        />
+                        <ChevronDownIcon className="h-6 w-6 flex-shrink-0 text-gray-400" />
                       )}
                     </div>
                     <p className="text-cyan-400/90 text-sm font-medium mt-1">

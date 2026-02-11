@@ -23,7 +23,7 @@ export default function Education() {
   return (
     <section className="max-w-[1800px] mx-auto px-12 sm:px-16 lg:px-24 pt-0 mt-8">
       <div>
-        <h2 className="text-4xl sm:text-4xl lg:text-5xl font-medium mb-8">
+        <h2 className="text-4xl sm:text-4xl lg:text-5xl font-medium mb-8 animate-glow">
           <span className="bg-gradient-to-r from-gray-400 via-gray-100 via-50% to-gray-400 bg-clip-text text-transparent">
             Education
           </span>
@@ -62,11 +62,7 @@ export default function Education() {
                               {edu.institution}
                             </h3>
                             {hasDetails && (
-                              <ChevronDownIcon
-                                className={`h-5 w-5 flex-shrink-0 text-gray-400 transition-transform duration-300 ease-out ${
-                                  isExpanded ? "rotate-180" : ""
-                                }`}
-                              />
+                              <ChevronDownIcon className="h-6 w-6 flex-shrink-0 text-gray-400" />
                             )}
                           </div>
                           <p className="text-gray-300 mt-1">{edu.degree}</p>

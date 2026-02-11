@@ -71,7 +71,7 @@ export default function Front() {
           style={{ bottom: '20%' }}
           aria-label="Scroll down"
         >
-          <ChevronDownIcon className="w-8 h-8 sm:w-10 sm:h-10 text-cyan-400 animate-bounce-custom" />
+          <ChevronDownIcon className="w-10 h-10 sm:w-12 sm:h-12 text-cyan-400 animate-bounce-custom" />
         </button>
       </section>
     </>

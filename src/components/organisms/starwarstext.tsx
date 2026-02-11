@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Center, Text3D } from "@react-three/drei";
+import { Text3D } from "@react-three/drei";
 import { Suspense, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { useRouter } from "next/navigation";
@@ -52,7 +52,7 @@ function StarWarsCrawl({ scale, titleSize }: StarWarsCrawlProps) {
         <mesh
           castShadow
           receiveShadow
-          onClick={() => router.push("/resume")}
+          onClick={() => window.open("/ZhuJerryResume.pdf", "_blank")}
           onPointerOver={() => { document.body.style.cursor = "pointer"; setHoveredLeft(true); }}
           onPointerOut={() => { document.body.style.cursor = "auto"; setHoveredLeft(false); }}
         >

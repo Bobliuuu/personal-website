@@ -6,7 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true npm run build",
+    "lighthouse": "npx -y lighthouse http://localhost:3000 --view",
+    "optimize-images": "./scripts/optimize-images.sh",
+    "type-check": "tsc --noEmit",
+    "test:build": "npm run lint && npm run type-check && npm run build",
+    "test:all": "./scripts/test-website.sh"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

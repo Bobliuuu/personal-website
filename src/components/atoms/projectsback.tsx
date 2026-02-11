@@ -48,7 +48,7 @@ export default function ProjectsBack() {
   }, [inViewIn]);
 
   return (
-    <div ref={sectionRef} className="relative w-full h-screen bg-black overflow-hidden flex flex-col items-center justify-end">
+    <div ref={sectionRef} id="projects-back" className="relative w-full h-screen bg-black overflow-hidden flex flex-col items-center justify-end">
       {/* Glowing Projects Text */}
       <h1 className="absolute top-10 left-1/2 -translate-x-1/2 z-20 text-6xl md:text-7xl font-bold text-white font-inter animate-glow pointer-events-none text-center drop-shadow-[0_0_40px_#a5f3fc]">
         Projects

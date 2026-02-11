@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import type { Container, Engine } from "@tsparticles/engine"
+import type { Engine } from "@tsparticles/engine"
 import Particles, { initParticlesEngine } from "@tsparticles/react"
 import { loadSlim } from "@tsparticles/slim"
 import type { ISourceOptions } from "@tsparticles/engine"
@@ -64,23 +64,14 @@ function ParticlesBackground() {
       number: {
         density: {
           enable: true,
-          valueArea: 900,
         },
         value: 20,
       },
       opacity: {
         value: 0.3,
-        random: true,
       },
       shape: {
         type: ["polygon", "circle"],
-        options: {
-          sides: 9,
-          width: 0,
-          close: true,
-          fill: false,
-          opacity: 0.1,
-        },
       },
       size: {
         value: { min: 1, max: 4 },

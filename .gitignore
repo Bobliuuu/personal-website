@@ -12,6 +12,10 @@
 
 # testing
 /coverage
+temp-test-results/
+website-stats-*.txt
+lighthouse-report-*.json
+lighthouse-report-*.html
 
 # next.js
 /.next/
@@ -32,6 +36,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -40,3 +45,15 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 public/video.mp4
+
+# Docker
+.dockerignore
+*.log
+
+# SSL certificates
+ssl/
+*.key
+*.crt
+
+# Monitoring
+.pm2/

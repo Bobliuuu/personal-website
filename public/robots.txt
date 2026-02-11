@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Disallow admin or private pages (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Sitemap location
+Sitemap: https://jerryzhu.org/sitemap.xml
+
+# Crawl delay (optional, be nice to servers)
+Crawl-delay: 1
