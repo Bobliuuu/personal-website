@@ -1,7 +1,7 @@
 import { Home, Github, Linkedin, Youtube, MessageCircle, BookOpen } from "lucide-react"
 
 // Custom X (Twitter) icon component - 30% smaller
-const XIcon = ({ className, size, ...props }: { className?: string; size?: number; [key: string]: any }) => (
+const XIcon = ({ className, size, ...props }: { className?: string; size?: number; [key: string]: unknown }) => (
   <svg 
     viewBox="0 0 24 24" 
     width={size || 14}
@@ -15,7 +15,7 @@ const XIcon = ({ className, size, ...props }: { className?: string; size?: numbe
 )
 
 // Custom Devpost icon component - 30% smaller 
-const DevpostIcon = ({ className, size, ...props }: { className?: string; size?: number; [key: string]: any }) => (
+const DevpostIcon = ({ className, size, ...props }: { className?: string; size?: number; [key: string]: unknown }) => (
   <svg 
     viewBox="0 0 24 24" 
     width={size || 14}
