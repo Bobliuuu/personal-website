@@ -1,0 +1,21 @@
+# Environment Variables
+.env
+.env.local
+.env.production
+.env.development
+
+# SSL certificates
+ssl/
+*.pem
+*.key
+*.crt
+
+# Kubernetes secrets
+k8s/secrets.yaml
+
+# PM2
+.pm2/
+
+# Logs
+*.log
+logs/
