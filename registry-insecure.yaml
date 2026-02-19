@@ -1,0 +1,10 @@
+machine:
+  registries:
+    mirrors:
+      "<redacted-host>:5001":
+        endpoints:
+          - "http://<redacted-host>:5001"
+    configs:
+      "<redacted-host>:5001":
+        tls:
+          insecureSkipVerify: true
