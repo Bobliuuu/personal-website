@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: personal-website
-        image: YOUR_REGISTRY/personal-website:latest
+        image: harbor-registry.harbor.svc.cluster.local/library/personal-website:v1
         ports:
         - containerPort: 3000
         env:

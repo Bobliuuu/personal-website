@@ -1,0 +1,6 @@
+machine:
+  registries:
+    config:
+      harbor.k8s.lab.jerryzhu.org:
+        tls:
+          insecureSkipVerify: true

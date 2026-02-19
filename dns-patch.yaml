@@ -1,0 +1,5 @@
+machine:
+  network:
+    nameservers:
+      - 10.0.0.34
+      - 1.1.1.1

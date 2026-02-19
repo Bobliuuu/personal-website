@@ -1,0 +1,10 @@
+machine:
+  registries:
+    mirrors:
+      "10.0.0.68:5001":
+        endpoints:
+          - "http://10.0.0.68:5001"
+    configs:
+      "10.0.0.68:5001":
+        tls:
+          insecureSkipVerify: true
