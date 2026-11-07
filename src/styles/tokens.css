@@ -82,3 +82,32 @@
     color-scheme: light;
   }
 }
+
+@layer tokens {
+  :root {
+    /* biome palette (kept from the original site: forest -> water -> mountain) */
+    --forest-900: #06140a;
+    --forest-700: #0f2a14;
+    --forest-500: #183c1e;
+    --water-400: #3bf1f7;
+    --deep-800: #002b3a;
+    --deep-900: #00141c;
+    --sky-100: #dfe8ef;
+    --glow-water: 0 0 18px rgb(59 241 247 / .55), 0 0 60px rgb(59 241 247 / .35);
+    --glow-lime: 0 0 18px rgb(212 255 58 / .45), 0 0 60px rgb(212 255 58 / .25);
+  }
+}
+
+@layer tokens {
+  :root {
+    --cyan: #22d3ee;
+    --violet: #b6aaff;
+    --accent: var(--cyan);
+    --accent-fg: #00141c;
+    --bg: #000;
+    --bg-raised: #0b0f10;
+    --line: rgb(255 255 255 / .12);
+    --fg-muted: #9ca3af;
+    --font-body: "Inter Variable", system-ui, sans-serif;
+  }
+}

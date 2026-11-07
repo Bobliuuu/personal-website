@@ -8,9 +8,8 @@ import Chip from "./Chip.astro";
 <section class="hero" id="top" data-hero>
   <div class="hero-pin">
     <div class="hero-media">
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="/video/hero-poster.webp" aria-hidden="true" tabindex="-1">
-        <source src="/video/hero.av1.mp4" type='video/mp4; codecs="av01.0.05M.08"' />
-        <source src="/video/hero.h264.mp4" type="video/mp4" />
+      <video class="hero-video" muted playsinline preload="auto" poster="/video/hero-poster.webp" aria-hidden="true" tabindex="-1" data-scrub-video>
+        <source src="/video/hero.scrub.mp4" type="video/mp4" />
       </video>
       <div class="hero-shade"></div>
       <Image class="hero-photo" src={warriors} alt="Jerry Zhu in a Waterloo Warriors ultimate jersey" widths={[480, 720, 960]} sizes="(max-width: 800px) 90vw, 42vw" loading="eager" fetchpriority="high" format="webp" />
@@ -22,7 +21,7 @@ import Chip from "./Chip.astro";
     <div class="hero-copy">
       <p class="mono kicker"><span class="dot"></span> Class of {profile.class} · Waterloo Varsity Ultimate</p>
       <h1 class="hero-name">{profile.first}<br />{profile.last}</h1>
-      <p class="hero-role">{profile.tagline}. Currently building at StackAdapt, compiling programs into transformer weights on the side.</p>
+      <p class="hero-role">Software Engineer @StackAdapt · BMath CS + Pure Math @UWaterloo · 30+ clubs, 50+ hackathons.</p>
       <dl class="hero-stats">
         {heroStats.map((s) => (
           <div class="stat"><dd><b>{s.value}</b></dd><dt class="mono muted">{s.label}</dt></div>
@@ -34,12 +33,12 @@ import Chip from "./Chip.astro";
       </div>
     </div>
 
-    <a class="hero-scroll mono" href="#scouting" aria-label="Scroll">Scroll ↓</a>
+    <a class="hero-scroll" href="#space" aria-label="Scroll down"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
   </div>
 </section>
 
 <style>
-  .hero { --p: 0; --c: 0; height: 240svh; position: relative; }
+  .hero { --p: 0; --c: 0; height: 380svh; position: relative; }
   :global(.no-js) .hero, .hero.static { --p: 1; --c: 1; height: auto; }
   .hero-pin { position: sticky; top: 0; height: 100svh; overflow: clip; }
   .static .hero-pin, :global(.no-js) .hero-pin { position: relative; }
@@ -53,7 +52,7 @@ import Chip from "./Chip.astro";
     opacity: clamp(0, (var(--p) - 0.6) * 3.5, 1); transform: translateY(calc((1 - var(--p)) * 8%)); filter: drop-shadow(0 30px 40px rgb(0 0 0 / .5)); }
   .hero-num { position: absolute; right: calc(4vw + 1.5rem); top: calc(12svh + 1rem); font-size: var(--step-1); color: var(--accent); opacity: var(--p); }
 
-  .hero-wordmark { position: absolute; left: var(--gutter); bottom: 6svh; font-size: clamp(5rem, 22vw, 22rem); color: #fff; mix-blend-mode: normal;
+  .hero-wordmark { font: 800 clamp(5rem, 22vw, 22rem)/.8 var(--font-display); text-transform: uppercase; position: absolute; left: var(--gutter); bottom: 6svh; font-size: clamp(5rem, 22vw, 22rem); color: #fff; mix-blend-mode: normal;
     opacity: max(0, calc(1 - var(--p) * 3.5)); transform: translateY(calc(var(--p) * -6svh)); pointer-events: none; line-height: .8; }
 
   .hero-copy { position: absolute; left: var(--gutter); top: 50%; width: min(46vw, 40rem); display: grid; gap: var(--s-4);
@@ -62,7 +61,7 @@ import Chip from "./Chip.astro";
   .kicker { display: flex; align-items: center; gap: var(--s-3); color: var(--accent); }
   .dot { width: .6rem; height: .6rem; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
   @keyframes pulse { 50% { opacity: .3; transform: scale(.7); } }
-  .hero-name { font-size: clamp(4rem, 9vw, 8.5rem); line-height: .82; }
+  .hero-name { font: 800 clamp(4rem, 9vw, 8.5rem)/.82 var(--font-display); text-transform: uppercase; }
   .hero-role { color: var(--fg-muted); max-width: 34ch; }
   .hero-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); margin: 0; }
   .hero-stats .stat b { font-size: var(--step-3); }

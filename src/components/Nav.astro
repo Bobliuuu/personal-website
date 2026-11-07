@@ -1,14 +1,15 @@
 ---
 import { profile } from "../data/site";
 ---
-<nav class="nav" aria-label="Primary">
-  <a class="logo" href="#top" aria-label="Home">JZ<i>.</i></a>
-  <ul class="mono">
-    <li><a href="#scouting">Scouting</a></li>
-    <li><a href="#reel">Highlights</a></li>
-    <li><a href="#log">Career</a></li>
-    <li><a href="#academics">Academics</a></li>
-    <li><a href="#recruit">Contact</a></li>
-    <li><button id="theme" class="chip" aria-label="Toggle theme">◐</button></li>
-  </ul>
-</nav>
+<header class="nav" id="nav">
+  <a class="logo silver" href="#top">{profile.name}</a>
+  <nav aria-label="Primary">
+    <ul>
+      <li><a href="#experience-section">Experiences</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href={profile.resume} target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+  </nav>
+</header>

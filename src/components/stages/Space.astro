@@ -1,0 +1,51 @@
+---
+// Stage 0: night sky. Aurora + stars + the 3D title, then a planet rises (re-entry) into the forest.
+---
+<section class="space" id="space" data-scrub>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="title3d" data-title3d>
+    <canvas></canvas>
+    <noscript><h1 class="glow">jerry zhu</h1></noscript>
+    <p class="hint mono">hover · click</p>
+  </div>
+  <div class="planet-wrap" aria-hidden="true">
+    <div class="planet"><div class="clouds"></div></div>
+  </div>
+</section>
+<style>
+  .space { position: relative; height: 230svh; background: radial-gradient(120% 80% at 50% 0%, #07111f 0%, #000 60%); overflow: clip; }
+  .stars { position: absolute; inset: 0; background-image:
+      radial-gradient(1.2px 1.2px at 12% 18%, #fff, transparent), radial-gradient(1px 1px at 78% 12%, #cde, transparent), radial-gradient(1.5px 1.5px at 40% 40%, #fff, transparent),
+      radial-gradient(1px 1px at 88% 55%, #fff, transparent), radial-gradient(1.2px 1.2px at 22% 72%, #bde, transparent), radial-gradient(1px 1px at 63% 83%, #fff, transparent), radial-gradient(1px 1px at 5% 90%, #fff, transparent);
+    background-size: 380px 380px, 520px 520px, 300px 300px, 440px 440px, 360px 360px, 480px 480px, 400px 400px; opacity: .8; transform: translateY(calc(var(--t, 0) * -12%)); }
+  /* aurora: three blurred ribbons drifting at different speeds */
+  .aurora { position: absolute; inset: -10% -10% 30% -10%; filter: blur(46px) saturate(1.3); mix-blend-mode: screen; opacity: .85; transform: translateY(calc(var(--t, 0) * 8%)); }
+  .aurora i { position: absolute; left: -10%; right: -10%; height: 46%; border-radius: 50%; background: linear-gradient(90deg, transparent, #22ffa6 20%, #19c2ff 50%, #8a5cff 80%, transparent); opacity: .5; animation: sway 14s ease-in-out infinite alternate; }
+  .aurora i:nth-child(1) { top: 6%; transform: rotate(-6deg); }
+  .aurora i:nth-child(2) { top: 22%; height: 36%; background: linear-gradient(90deg, transparent, #5cffd9 25%, #6aa0ff 60%, transparent); animation-duration: 19s; animation-direction: alternate-reverse; opacity: .4; }
+  .aurora i:nth-child(3) { top: 38%; height: 30%; background: linear-gradient(90deg, transparent, #b46cff 30%, #22d3ee 70%, transparent); animation-duration: 23s; opacity: .3; }
+  @keyframes sway { from { transform: translateX(-6%) rotate(-5deg) scaleY(.9); } to { transform: translateX(6%) rotate(4deg) scaleY(1.15); } }
+
+  .title3d { position: sticky; top: 0; height: 100svh; display: grid; place-items: center; z-index: 2; opacity: calc(1 - var(--t, 0) * 1.6); }
+  .title3d canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .title3d .hint { position: absolute; bottom: 14svh; color: #6b7280; }
+  .title3d h1 { font-family: "Pacifico", cursive; }
+
+  /* planet: rises as you scroll, atmosphere glow, fills the screen = transition to forest below */
+  .planet-wrap { position: absolute; inset: 0; z-index: 1; overflow: clip; pointer-events: none; }
+  .planet { position: absolute; left: 50%; bottom: 0; width: 150vmax; aspect-ratio: 1; border-radius: 50%;
+    translate: -50% calc(105% - var(--t, 0) * 82%);
+    background:
+      radial-gradient(40% 30% at 30% 28%, rgb(255 255 255 / .22), transparent 70%),
+      radial-gradient(30% 22% at 62% 40%, #2f7d3a 0%, transparent 70%),
+      radial-gradient(26% 20% at 28% 55%, #1c5d2a 0%, transparent 70%),
+      radial-gradient(22% 16% at 75% 68%, #3f9a4d 0%, transparent 70%),
+      radial-gradient(circle at 50% 30%, #1a73c9, #0a3a73 55%, #03142e 80%);
+    box-shadow: inset -6vmax -6vmax 14vmax rgb(0 0 0 / .75), 0 0 6vmax 1vmax rgb(80 190 255 / .55), 0 0 22vmax 6vmax rgb(40 130 255 / .25); }
+  .planet .clouds { position: absolute; inset: 0; border-radius: 50%; background:
+      radial-gradient(24% 6% at 30% 30%, rgb(255 255 255 / .35), transparent), radial-gradient(30% 7% at 66% 48%, rgb(255 255 255 / .28), transparent), radial-gradient(22% 5% at 40% 62%, rgb(255 255 255 / .25), transparent);
+    animation: spin 90s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .aurora i, .planet .clouds { animation: none; } }
+</style>

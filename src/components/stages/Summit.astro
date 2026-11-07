@@ -1,0 +1,157 @@
+---
+import { Image } from "astro:assets";
+import mountain from "../../assets/mountain.png";
+import cloud from "../../assets/cloud.png";
+import { projects } from "../../data/projects";
+import { featured } from "../../data/site";
+import { publications, awards } from "../../data/achievements";
+import { contributions } from "../../data/contributions";
+import { profile, links } from "../../data/site";
+import Chip from "../Chip.astro";
+const reel = projects;
+---
+<section class="peak" id="projects-back" data-scrub>
+  <h1 class="glow">Projects</h1>
+  <Image class="cloud l" src={cloud} alt="" widths={[400]} loading="lazy" aria-hidden="true" />
+  <Image class="cloud r" src={cloud} alt="" widths={[400]} loading="lazy" aria-hidden="true" />
+  <Image class="mtn" src={mountain} alt="" widths={[900, 1400, 1768]} sizes="100vw" loading="lazy" format="webp" aria-hidden="true" />
+  <div class="fade"></div>
+</section>
+
+<div id="projects" class="below">
+  <div class="wrap">
+    <h2 class="glow reveal"><span class="silver">Featured</span></h2>
+    <div class="cards">
+      {featured.map((f, i) => (
+        <a class="tcard foil" href={f.href} target="_blank" rel="noopener" style={`--h:${(i * 47) % 360}`} data-card>
+          <div class="in"><div class="face front"><span class="mono tag">{f.tag}</span><h3>{f.title}</h3>{f.stat && <span class="stat-pill">{f.stat}</span>}<div class="shine"></div></div>
+            <div class="face back"><h3>{f.title}</h3><p>{f.blurb}</p><span class="chip chip--accent">Open repo ↗</span></div></div>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="glow reveal" style="margin-top:7rem"><span class="silver">Hackathons</span></h2>
+    <div class="cards">
+      {reel.map((p) => (
+        <div class="tcard" data-card tabindex="0">
+          <div class="in">
+            <div class="face front art">
+              <img src={p.image} alt={p.title} loading="lazy" decoding="async" width="640" height="440" />
+              <div class="grad"></div>
+              <div class="cap"><h3>{p.title}{p.winner && <span class="chip chip--gold">Winner</span>}</h3><span class="muted">{p.year}</span></div><div class="shine"></div>
+            </div>
+            <div class="face back">
+              <div class="bh"><h3>{p.title}</h3><a href={p.link} target="_blank" rel="noopener" aria-label={`Open ${p.title}`}>↗</a></div>
+              <p>{p.description}</p>
+              {p.teammates && <p class="muted small"><b>Team:</b> {p.teammates.join(", ")}</p>}
+              <div class="chips">{p.tags.slice(0, 4).map((t) => <Chip variant="accent">{t}</Chip>)}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <section id="achievements" class="blk">
+      <h2 class="glow reveal"><span class="silver">Achievements</span></h2>
+      <div class="pubs">
+        {publications.map((p) => (
+          <a class="glass pub reveal" href={p.url} target="_blank" rel="noopener" data-tilt><span class="mono cy">{p.publisher} · {p.date}</span><b>{p.title}</b></a>
+        ))}
+      </div>
+      <div class="awards">
+        {awards.map((a, i) => (
+          <div class="glass award reveal" style={`--i:${i % 4}`}><span class="muted small">{a.date}</span><b>{a.title}</b><span>{a.issuer}</span>{a.description && <p class="muted small">{a.description}</p>}</div>
+        ))}
+      </div>
+    </section>
+
+    <section id="contributions" class="blk">
+      <h2 class="glow reveal"><span class="silver">Contributions</span></h2>
+      <div class="tl">
+        {contributions.map((c, i) => (
+          <article class="tl-item reveal" style={`--i:${i % 3}`}>
+            <span class="dot"></span>
+            <p class="muted small">{c.date}</p><h3>{c.title}</h3><p class="cy">{c.organization}</p>
+            <ul role="list" class="muted">{c.points.map((p) => <li>{p}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+</div>
+
+<section id="contact" class="contact">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"><i></i><i></i></div>
+  <div class="wrap grid">
+    <div class="left"><h1 class="glow reveal">Contact me</h1><p class="muted reveal" style="font-size:1.25rem">Have a question, new opportunity, or just want to have a quick chat? Feel free to send me a message.</p></div>
+    <form class="reveal" data-contact data-to={profile.email}>
+      <input name="name" placeholder="Name" required />
+      <input name="email" type="email" placeholder="Email" required />
+      <textarea name="message" placeholder="Message" required></textarea>
+      <button class="btn" type="submit"><span class="silver">Submit</span></button>
+    </form>
+  </div>
+  <ul class="socials mono" role="list">{links.map((l) => <li><a href={l.href} target="_blank" rel="noopener">{l.name}</a></li>)}</ul>
+  <p class="mono muted foot">© {new Date().getFullYear()} Jerry Zhu · <a href="/design">design system</a></p>
+</section>
+
+<style>
+  .peak { position: relative; height: 100svh; min-height: 560px; background: linear-gradient(180deg, #000 0%, #0a1620 40%, #dfe8ef 100%); overflow: hidden; display: grid; justify-items: center; }
+  .peak h1 { position: absolute; top: 9svh; z-index: 20; font-size: clamp(3.5rem, 2rem + 7vw, 7rem); font-weight: 700; text-shadow: 0 0 40px #a5f3fc; pointer-events: none; }
+  .cloud { position: absolute; width: min(33vw, 400px); height: auto; opacity: .85; z-index: 10; transition: transform 1.2s var(--ease-out), opacity 1.2s; }
+  .cloud.l { top: 24%; left: 0; transform: translateX(calc(-60% + var(--t, 0) * 160%)); }
+  .cloud.r { top: 32%; right: 0; transform: translateX(calc(60% - var(--t, 0) * 160%)); }
+  .mtn { position: absolute; inset: auto 0 0 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; z-index: 5; transform: translateY(calc((1 - var(--t, 0)) * 14%)) scale(1.04); will-change: transform; }
+  .fade { position: absolute; left: 0; right: 0; bottom: 0; height: 16rem; background: linear-gradient(0deg, #0d1f2d, transparent); z-index: 30; }
+
+  .below { background: linear-gradient(180deg, #0d1f2d, #000); padding-block: 4rem 6rem; }
+  .below h2 { margin-bottom: 2.5rem; text-align: center; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); gap: 2rem; }
+  /* trading-card flip + pointer tilt + foil sheen */
+  .tcard { position: relative; aspect-ratio: 16/11; perspective: 1500px; display: block; text-decoration: none; color: inherit; cursor: pointer; outline-offset: 6px; }
+  .tcard .in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .6s ease-in-out; border-radius: 18px; }
+  .tcard:hover .in, .tcard:focus-visible .in, .tcard.flip .in { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; border-radius: 18px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; border: 1px solid rgb(255 255 255 / .12); background: linear-gradient(135deg, #111827, #000); }
+  .back { transform: rotateY(180deg); padding: 1.75rem; display: flex; flex-direction: column; gap: .9rem; background: linear-gradient(135deg, #111827, #1f2937 55%, #000); border-color: rgb(255 255 255 / .2); }
+  .back p { color: #d1d5db; } .back .chips { margin-top: auto; }
+  .bh { display: flex; justify-content: space-between; align-items: start; } .bh a { color: #22d3ee; font-size: 1.5rem; text-decoration: none; }
+  .art img { width: 100%; height: 100%; object-fit: cover; opacity: .32; }
+  .grad { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(0 0 0 / .85), rgb(0 0 0 / .2) 50%, transparent); }
+  .cap { position: absolute; inset: auto 1.5rem 1.25rem; } .cap h3 { display: flex; gap: .6rem; align-items: center; font-size: 1.6rem; font-weight: 700; color: #fff; }
+  .shine { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: color-dodge; opacity: 0; transition: opacity .3s; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / .55), transparent 45%); }
+  .tcard:hover .shine { opacity: .35; }
+  .foil .front { background: conic-gradient(from calc(var(--h) * 1deg), #0b1220, #0e3a4a, #1a0f3a, #0b3a24, #0b1220); padding: 1.75rem; display: flex; flex-direction: column; justify-content: flex-end; gap: .5rem; }
+  .foil .front::before { content: ""; position: absolute; inset: -40%; background: conic-gradient(from 0deg, transparent, rgb(34 211 238 / .22), transparent 30%, rgb(212 255 58 / .16), transparent 60%); animation: spin 14s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .foil h3 { position: relative; font-size: 2rem; font-weight: 700; color: #fff; } .foil .tag { position: relative; color: #22d3ee; }
+  .stat-pill { position: relative; width: max-content; padding: .2rem .7rem; border-radius: 999px; background: rgb(255 255 255 / .1); border: 1px solid rgb(255 255 255 / .2); font-size: .85rem; }
+  .small { font-size: .9rem; }
+
+  .blk { margin-top: 9rem; } .blk h2 { text-align: left; }
+  .pubs { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); margin-bottom: 1.5rem; }
+  .pub { display: grid; gap: .6rem; padding: 1.5rem; text-decoration: none; } .pub b { font-weight: 500; font-size: 1.1rem; line-height: 1.35; }
+  .cy { color: #22d3ee; }
+  .awards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); }
+  .award { padding: 1.25rem 1.5rem; display: grid; gap: .25rem; align-content: start; border-left: 3px solid #eab308; } .award b { font-size: 1.15rem; font-weight: 600; }
+  .tl { position: relative; display: grid; gap: 2.5rem; padding-left: 2rem; border-left: 1px solid rgb(255 255 255 / .18); }
+  .tl-item { position: relative; display: grid; gap: .25rem; max-width: 60rem; } .tl-item .dot { position: absolute; left: calc(-2rem - 6px); top: .5rem; width: 11px; height: 11px; border-radius: 50%; background: #22d3ee; box-shadow: 0 0 14px #22d3ee; }
+  .tl-item ul { display: grid; gap: .3rem; padding-left: 1.1rem; list-style: disc; margin-top: .4rem; }
+
+  .contact { position: relative; padding-block: 9rem 3rem; background: linear-gradient(180deg, #000, #04101c 60%, #000); overflow: hidden; }
+  .contact .stars { position: absolute; inset: 0; background-image: radial-gradient(1.2px 1.2px at 12% 18%, #fff, transparent), radial-gradient(1px 1px at 78% 12%, #cde, transparent), radial-gradient(1.5px 1.5px at 40% 40%, #fff, transparent), radial-gradient(1px 1px at 88% 55%, #fff, transparent); background-size: 380px 380px, 520px 520px, 300px 300px, 440px 440px; opacity: .7; }
+  .contact .aurora { position: absolute; inset: -20% -10% 40% -10%; filter: blur(50px); mix-blend-mode: screen; opacity: .5; }
+  .contact .aurora i { position: absolute; left: -10%; right: -10%; height: 50%; border-radius: 50%; background: linear-gradient(90deg, transparent, #22ffa6 25%, #19c2ff 55%, #8a5cff 80%, transparent); animation: sway 16s ease-in-out infinite alternate; }
+  .contact .aurora i + i { top: 30%; opacity: .6; animation-duration: 22s; animation-direction: alternate-reverse; }
+  @keyframes sway { from { transform: translateX(-6%) rotate(-5deg); } to { transform: translateX(6%) rotate(4deg) scaleY(1.15); } }
+  .grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; min-height: 50svh; }
+  .left { display: grid; gap: 1.5rem; } .left h1 { font-weight: 800; }
+  form { display: grid; gap: 1.25rem; max-width: 32rem; width: 100%; }
+  input, textarea { width: 100%; background: rgb(0 0 0 / .6); border: 1px solid rgb(255 255 255 / .3); border-radius: 8px; padding: .85rem 1rem; font-size: 1.1rem; color: #fff; transition: border-color .2s, box-shadow .2s; }
+  input:focus, textarea:focus { outline: none; border-color: #22d3ee; box-shadow: 0 0 0 3px rgb(34 211 238 / .2); } textarea { min-height: 11rem; resize: vertical; }
+  form .btn { justify-self: start; }
+  .socials { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 6rem; padding: 0; } .socials a { text-decoration: none; color: #d1d5db; } .socials a:hover { color: #22d3ee; text-shadow: 0 0 14px #22d3ee; }
+  .foot { position: relative; text-align: center; margin-top: 2.5rem; max-width: none; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; gap: 3rem; } }
+  @media (prefers-reduced-motion: reduce) { .foil .front::before, .contact .aurora i { animation: none; } }
+</style>

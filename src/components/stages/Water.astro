@@ -1,0 +1,78 @@
+---
+import underwater from "../../assets/underwater.jpg";
+import { experiences } from "../../data/experience";
+import Chip from "../Chip.astro";
+const fmt = (d: string | string[]) => (Array.isArray(d) ? `${d[0]} - ${d[1]}` : d);
+type Exp = (typeof experiences)[number];
+const groups: { company: string; logo: string; entries: Exp[] }[] = [];
+for (const e of experiences) { let g = groups.find((x) => x.company === e.company); if (!g) groups.push((g = { company: e.company, logo: e.logo, entries: [] })); g.entries.push(e); }
+const range = (g: (typeof groups)[number]) => { const s = g.entries.map((e) => (Array.isArray(e.date) ? e.date[0] : e.date)); const last = g.entries[0].date; return g.entries.length === 1 ? fmt(last) : `${s[s.length - 1]} - ${Array.isArray(last) ? last[1] : last}`; };
+---
+<section class="water" id="water" data-scrub>
+  <canvas data-water data-src={underwater.src}></canvas>
+  <img class="fallback" src={underwater.src} alt="" aria-hidden="true" />
+  <div class="fade top"></div><div class="fade bottom"></div>
+  <h1 class="glow">experiences</h1>
+  <p class="hint mono">move your cursor through the water</p>
+</section>
+
+<div id="experience-section" class="exp">
+  <div class="wrap list">
+    {groups.map((g) => {
+      const multi = g.entries.length > 1; const one = g.entries[0];
+      return (
+        <details class="glass card reveal" data-tilt>
+          <summary>
+            <div class="when"><b>{range(g)}</b><span class="muted">{one.location}</span></div>
+            <div class="who">
+              <img src={g.logo} alt="" width="48" height="48" loading="lazy" decoding="async" />
+              <div>
+                <h3>{g.company} <i class="chev" aria-hidden="true">⌄</i></h3>
+                <div class="role">{multi ? `${g.entries.length} positions` : one.title}</div>
+                {!multi && one.description && <div class="muted">{one.description}</div>}
+                {!multi && one.tags && <div class="chips">{one.tags.map((t) => <Chip>{t}</Chip>)}</div>}
+              </div>
+            </div>
+          </summary>
+          <div class="body">
+            {g.entries.map((e) => (
+              <div class="pos">
+                {multi && <div class="pos-h"><b>{e.title}</b><span class="muted small">{fmt(e.date)}</span></div>}
+                <ul role="list">{(multi ? e.points : e.points.slice(e.description ? 0 : 1)).map((p) => <li>{p}</li>)}</ul>
+                {multi && e.tags && <div class="chips">{e.tags.map((t) => <Chip>{t}</Chip>)}</div>}
+              </div>
+            ))}
+          </div>
+        </details>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  .water { position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: #0a4a5e; display: grid; place-items: center; }
+  .water canvas, .fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .fallback { display: none; } canvas[data-fallback] ~ .fallback { display: block; }
+  canvas[data-fallback] { display: none; }
+  .fade { position: absolute; left: 0; right: 0; height: 16rem; pointer-events: none; z-index: 2; }
+  .fade.top { top: 0; background: linear-gradient(#3bf1f7, transparent); opacity: .85; }
+  .fade.bottom { bottom: 0; background: linear-gradient(0deg, #000, transparent); }
+  .water h1 { position: relative; z-index: 3; font-size: clamp(3.5rem, 2rem + 7vw, 7rem); font-weight: 700; pointer-events: none; transform: translateY(calc((var(--t, 0) - .5) * 40px)); }
+  .hint { position: absolute; bottom: 12svh; z-index: 3; color: rgb(255 255 255 / .75); }
+  .exp { background: linear-gradient(180deg, #000, #002b3a 40%, #000); padding-block: 2rem 8rem; }
+  .list { display: grid; gap: 1rem; }
+  .card summary { list-style: none; cursor: pointer; display: flex; gap: 2.5rem; padding: 1.75rem; flex-wrap: wrap; }
+  .card summary::-webkit-details-marker { display: none; }
+  .when { flex: 0 0 15rem; display: grid; align-content: start; gap: .2rem; } .when b { font-weight: 500; color: #bfdbfe; font-size: 1.1rem; }
+  .who { display: flex; gap: 1.25rem; flex: 1; min-width: 16rem; }
+  .who img { width: 48px; height: 48px; object-fit: contain; border-radius: 50%; background: rgb(255 255 255 / .9); padding: 5px; flex: none; }
+  .who h3 { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; }
+  .role { color: #d1d5db; font-size: 1.1rem; margin-block: .15rem .4rem; }
+  .who .chips { margin-top: .75rem; }
+  .chev { font-style: normal; color: #9ca3af; transition: transform .3s; } details[open] .chev { transform: rotate(180deg); }
+  .body { border-top: 1px solid rgb(255 255 255 / .1); padding: 1.5rem 1.75rem 1.75rem calc(15rem + 2.5rem + 1.75rem); display: grid; gap: 1.25rem; background: rgb(255 255 255 / .02); }
+  .pos-h { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: .4rem; }
+  .body ul { display: grid; gap: .5rem; color: #d1d5db; padding-left: 1.1rem; list-style: disc; } .body li::marker { color: #22d3ee; }
+  .small { font-size: .9rem; }
+  @media (max-width: 860px) { .when { flex-basis: 100%; } .body { padding-left: 1.75rem; } }
+</style>

@@ -1,0 +1,132 @@
+---
+import { Image } from "astro:assets";
+import canopy from "../../assets/forest2.jpg";
+import portrait from "../../assets/jerry.png";
+import { education } from "../../data/education";
+import { skillCategories } from "../../data/skills";
+import { scouting } from "../../data/site";
+import Chip from "../Chip.astro";
+import Button from "../Button.astro";
+const edus = education.filter((e) => e.activities || e.scholarships);
+const rest = education.filter((e) => !e.activities && !e.scholarships);
+const bookColors = ["#3e4798", "#1f6f5c", "#8a3b6e", "#9a5a1b"];
+---
+<div id="hero-education-skills" class="forest" data-scrub>
+  <Image class="canopy" src={canopy} alt="" widths={[800, 1400]} sizes="100vw" loading="lazy" aria-hidden="true" style="transform: translateY(calc(var(--t, 0) * 12%)) scale(1.15)" />
+  <div class="tint"></div>
+  <div class="wrap content">
+
+    <!-- ABOUT ME (original copy) -->
+    <section id="hero" class="about">
+      <svg class="frisbee-arc" data-frisbee viewBox="0 0 64 24" width="64" height="24" aria-hidden="true">
+        <ellipse cx="32" cy="14" rx="30" ry="8" fill="#0b3b1e"/><ellipse cx="32" cy="11" rx="30" ry="8" fill="#d4ff3a"/><ellipse cx="32" cy="10" rx="18" ry="4.5" fill="#b4de1a"/>
+      </svg>
+      <div class="about-text">
+        <h1 class="glow reveal">About <span class="me">me</span></h1>
+        <p class="sub muted reveal">Software Engineer <b class="cy">@StackAdapt</b> | BMATH Computer Science and C&amp;O and Comp Math and Pure Math Joint <b class="cy">@UWaterloo</b> | 30+ Clubs, 50+ Hackathons</p>
+        <div class="lines reveal">
+          <p>Hi! My name is Jerry. I am a <i>Software Engineer</i> passionate about <b>AI/ML</b>, <b>DevOps</b>, and <b>full-stack software development</b>.</p>
+          <p>I organize and attend <b>clubs</b>, <b>hackathons</b>, and <b>conferences</b>.</p>
+          <p>I play <b>varsity ultimate</b>, perform <b>acapella</b> and <b>dance</b>, and love <b>gardening</b>!</p>
+        </div>
+        <div class="row reveal">
+          <Button href="https://blog.jerryzhu.org" external>Blog</Button>
+          <Button href="https://bobliuuu.substack.com/" external>Substack</Button>
+        </div>
+      </div>
+      <div class="about-card reveal" style="--i:2">
+        <div class="frame glass" data-tilt>
+          <Image src={portrait} alt="Jerry Zhu" widths={[400, 700]} sizes="(max-width: 800px) 80vw, 360px" loading="lazy" />
+          <dl class="sheet">
+            {scouting.slice(0, 5).map(([k, v]) => (<><dt class="mono">{k}</dt><dd>{v}</dd></>))}
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="block">
+      <h2 class="glow reveal"><span class="silver">Education</span></h2>
+      <div class="edu">
+        {edus.map((e) => (
+          <details class="glass card reveal" data-tilt>
+            <summary>
+              <img src={e.logo} alt="" width="56" height="56" loading="lazy" />
+              <span class="meta"><h3>{e.institution}</h3><span class="muted">{e.degree}</span>{e.grade && <span class="muted small">Grade: {e.grade}</span>}</span>
+              <span class="muted small when">{e.dates}</span><i class="chev" aria-hidden="true">⌄</i>
+            </summary>
+            <div class="body">
+              {e.scholarships && <ul role="list">{e.scholarships.map((s) => <li>🏆 {s}</li>)}</ul>}
+              {e.activities && <div class="chips">{e.activities.map((a) => <Chip>{a}</Chip>)}</div>}
+            </div>
+          </details>
+        ))}
+        {rest.map((e) => (
+          <div class="glass card reveal mini"><img src={e.logo} alt="" width="40" height="40" loading="lazy" /><div><b>{e.degree}</b><div class="muted small">{e.institution} · {e.dates}</div></div></div>
+        ))}
+      </div>
+    </section>
+
+    <!-- SKILLS: books (kept from the original) -->
+    <section id="skills" class="block">
+      <h2 class="glow reveal"><span class="silver">Skills</span></h2>
+      <div class="books reveal" data-books>
+        {skillCategories.map((c, i) => (
+          <button class:list={["book", i === 0 && "on"]} style={`--c:${bookColors[i]}`} data-book={c.id} aria-pressed={i === 0}>
+            <span class="spine"></span><span class="t">{c.name}</span><span class="d">{c.description}</span>
+          </button>
+        ))}
+      </div>
+      {skillCategories.map((c, i) => (
+        <div class="chips shelf" data-shelf={c.id} hidden={i !== 0}>{c.skills.map((s) => <Chip variant="accent">{s}</Chip>)}</div>
+      ))}
+    </section>
+  </div>
+</div>
+
+<style>
+  .forest { position: relative; overflow: clip; background: linear-gradient(180deg, #03142e 0, #183c1e 18%, #0f2a14 70%, #3bf1f7 100%); }
+  .canopy { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .3; mix-blend-mode: luminosity; will-change: transform; }
+  .tint { position: absolute; inset: 0; background: linear-gradient(180deg, #03142e, rgb(24 60 30 / .55) 20%, rgb(15 42 20 / .35) 70%, rgb(59 241 247 / .55)); }
+  .content { position: relative; padding-block: 12rem 12rem; display: grid; gap: 10rem; }
+  .about { position: relative; display: grid; grid-template-columns: 1fr 22rem; gap: 4rem; align-items: center; }
+  .about h1 .me { color: var(--violet); font-style: italic; }
+  .about-text { display: grid; gap: 1.5rem; }
+  .sub { font-weight: 500; font-size: 1.1rem; }
+  .cy { color: #22d3ee; font-weight: 500; }
+  .lines { display: grid; gap: .9rem; font-size: clamp(1.1rem, 1rem + .6vw, 1.5rem); line-height: 1.6; color: #d1d5db; }
+  .lines b { color: #fff; font-weight: 600; } .lines i { font-weight: 600; }
+  .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .frame { padding: 1rem; overflow: hidden; }
+  .frame img { border-radius: 10px; width: 100%; height: 24rem; object-fit: cover; object-position: 50% 18%; }
+  .sheet { display: grid; grid-template-columns: auto 1fr; gap: .4rem 1rem; margin: 1rem .25rem .25rem; font-size: .9rem; }
+  .sheet dt { color: #6b7280; } .sheet dd { margin: 0; font-weight: 500; }
+  .frisbee-arc { position: absolute; top: 40px; left: -20vw; opacity: 0; z-index: 5; pointer-events: none; }
+  .frisbee-arc.fly { animation: arc 4s cubic-bezier(.6,.05,.4,1) 1; }
+  @keyframes arc { 0% { left: -20vw; top: 40px; opacity: 1; } 25% { left: 0; top: -40px; opacity: 1; } 50% { left: 25vw; top: -100px; opacity: 1; transform: rotate(180deg); } 75% { left: 50vw; top: -40px; opacity: 1; } 100% { left: 75vw; top: 40px; opacity: 0; transform: rotate(360deg); } }
+
+  .block h2 { margin-bottom: 2.5rem; }
+  .edu { display: grid; gap: 1rem; }
+  .card summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 1.25rem; padding: 1.5rem; }
+  .card summary::-webkit-details-marker { display: none; }
+  .card summary img { width: 56px; height: 56px; object-fit: contain; background: #fff; border-radius: 10px; padding: 5px; flex: none; }
+  .meta { display: grid; flex: 1; gap: .1rem; } .meta h3 { font-size: 1.3rem; }
+  .small { font-size: .9rem; } .when { white-space: nowrap; }
+  .chev { font-style: normal; font-size: 1.5rem; color: #9ca3af; transition: transform .3s; } details[open] .chev { transform: rotate(180deg); }
+  .body { padding: 0 1.5rem 1.5rem 5.5rem; display: grid; gap: 1rem; }
+  .body ul { display: grid; gap: .4rem; color: #d1d5db; }
+  .mini { display: flex; gap: 1rem; align-items: center; padding: 1rem 1.5rem; }
+  .mini img { width: 40px; height: 40px; object-fit: contain; background: #fff; border-radius: 8px; padding: 4px; }
+
+  /* books */
+  .books { display: flex; justify-content: center; gap: 2.5rem; perspective: 1000px; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .book { all: unset; cursor: pointer; position: relative; width: 170px; height: 240px; background: var(--c); border-radius: 3px 8px 8px 3px; transform-origin: left center; transform-style: preserve-3d; transition: transform .35s cubic-bezier(.3,.7,.3,1), box-shadow .35s; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem 1rem; text-align: center; gap: .6rem; box-shadow: 8px 8px 24px rgb(0 0 0 / .45); }
+  .book::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 12px; background: rgb(0 0 0 / .28); }
+  .book .t { font: 700 1.05rem/1.2 Georgia, serif; color: #fff; text-shadow: 1px 1px 2px rgb(0 0 0 / .5); }
+  .book .d { font-size: .72rem; color: rgb(255 255 255 / .7); }
+  .book:hover { transform: rotateY(-22deg) rotateZ(-2deg) scale(1.03); }
+  .book.on { transform: rotateY(-28deg) rotateZ(-2deg) scale(1.06); box-shadow: 14px 14px 36px rgb(0 0 0 / .6), 0 0 34px rgb(34 211 238 / .45); }
+  .shelf[hidden] { display: none; }
+  .shelf { justify-content: center; max-width: 60rem; margin-inline: auto; padding: 1.5rem; border-radius: 14px; background: rgb(0 20 28 / .72); border: 1px solid rgb(255 255 255 / .12); backdrop-filter: blur(8px); }
+  @media (max-width: 860px) { .about { grid-template-columns: 1fr; } .body { padding-left: 1.5rem; } .when { display: none; } }
+</style>

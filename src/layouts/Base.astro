@@ -1,14 +1,14 @@
 ---
 import "@fontsource-variable/inter";
-import "@fontsource/barlow-condensed/700.css";
 import "@fontsource/barlow-condensed/800.css";
 import "@fontsource-variable/jetbrains-mono";
+import "@fontsource/pacifico";
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/components.css";
 import Nav from "../components/Nav.astro";
-interface Props { title?: string; description?: string }
-const { title = "Jerry Zhu | Software Engineer & Varsity Ultimate Player", description = "Jerry Zhu: Waterloo CS + Math '27, varsity ultimate player, software engineer on data, infra, and ML systems." } = Astro.props;
+interface Props { title?: string; description?: string; loader?: boolean }
+const { title = "Jerry Zhu | Software Engineer & Varsity Ultimate Player", description = "Jerry Zhu: Waterloo CS + Math '27, varsity ultimate player, software engineer on data, infra, and ML systems.", loader = true } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
@@ -22,15 +22,21 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#0b0d0c" />
+    <meta name="theme-color" content="#000000" />
     <link rel="icon" href="/favicon.ico" />
     <script is:inline>
       document.documentElement.classList.remove("no-js");
-      try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+      if (document.documentElement.dataset.loader !== "off" && !sessionStorage.getItem("seen")) document.documentElement.classList.add("loading");
     </script>
     <script type="application/ld+json" is:inline set:html={JSON.stringify({"@context":"https://schema.org","@type":"Person",name:"Jerry Zhu",url:"https://jerryzhu.org",alumniOf:"University of Waterloo",jobTitle:"Software Engineer",sameAs:["https://github.com/bobliuuu","https://www.linkedin.com/in/jerryzhu2/"]})} />
   </head>
   <body>
+    {loader && (
+      <div id="loader" aria-hidden="true">
+        <span id="loader-name">jerry zhu</span>
+        <div class="bar"><i id="loader-bar"></i></div>
+      </div>
+    )}
     <canvas id="boids" aria-hidden="true"></canvas>
     <Nav />
     <main><slot /></main>
@@ -38,7 +44,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </body>
 </html>
 <style is:global>
-  #boids { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .3; }
-  main, .nav { position: relative; z-index: 1; }
-  .nav { position: fixed; }
+  #boids { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .35; }
+  main { position: relative; z-index: 1; }
+  #loader { position: fixed; inset: 0; z-index: 9999; background: #000; display: none; flex-direction: column; align-items: center; justify-content: center; transition: opacity .8s; }
+  html.loading #loader { display: flex; }
+  #loader.out { opacity: 0; pointer-events: none; }
+  #loader-name { font: 400 clamp(3rem, 8vw, 7rem)/1 "Pacifico", cursive; color: #fff; letter-spacing: .02em; }
+  #loader .bar { position: absolute; left: 1.5rem; right: 1.5rem; bottom: 1.5rem; height: 12px; background: #1f2937; border-radius: 8px; overflow: hidden; }
+  #loader-bar { display: block; height: 100%; width: 0; border-radius: 8px; background: linear-gradient(90deg, #ef4444, #f87171 60%, #222); transition: width .2s; }
+  html.loading body { overflow: hidden; }
 </style>
