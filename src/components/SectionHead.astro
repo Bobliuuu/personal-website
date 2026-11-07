@@ -1,0 +1,10 @@
+---
+interface Props { kicker: string; title: string; lede?: string }
+const { kicker, title, lede } = Astro.props;
+---
+<header class="sh reveal">
+  <span class="mono cy">{kicker}</span>
+  <h2 class="glow"><span class="silver">{title}</span></h2>
+  {lede && <p class="muted">{lede}</p>}
+</header>
+<style>.sh { display: grid; gap: .75rem; margin-bottom: 3rem; } .cy { color: var(--cyan); }</style>
