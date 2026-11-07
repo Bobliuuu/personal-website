@@ -3,61 +3,91 @@ import { Image } from "astro:assets";
 import warriors from "../assets/jerry-warriors.png";
 import { profile, heroStats } from "../data/site";
 import Button from "./Button.astro";
-import Chip from "./Chip.astro";
+
+const ticker = ["JERRY ZHU", "WATERLOO WARRIORS", "ULTIMATE", "SOFTWARE ENGINEER", "STACKADAPT", "CLASS OF 2027"];
 ---
 <section class="hero" id="top" data-hero>
   <div class="hero-pin">
-    <div class="hero-media">
-      <video class="hero-video" muted playsinline preload="auto" poster="/video/hero-poster.webp" aria-hidden="true" tabindex="-1" data-scrub-video>
-        <source src="/video/hero.scrub.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-shade"></div>
-      <Image class="hero-photo" src={warriors} alt="Jerry Zhu in a Waterloo Warriors ultimate jersey" widths={[480, 720, 960]} sizes="(max-width: 800px) 90vw, 42vw" loading="eager" fetchpriority="high" format="webp" />
-      <span class="hero-num mono" aria-hidden="true">'27</span>
-    </div>
+    <!-- outer ring: rotating conic border, chamfered corners -->
+    <div class="frame">
+      <div class="inner">
+        <!-- layer 1: scrubbed video, fades to nothing -->
+        <video class="hero-video" muted playsinline preload="auto" poster="/video/hero-poster.webp" aria-hidden="true" tabindex="-1" data-scrub-video>
+          <source src="/video/hero.scrub.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-shade"></div>
+        <h1 class="hero-wordmark" aria-hidden="true">Jerry<br />Zhu</h1>
 
-    <h1 class="hero-wordmark" aria-hidden="true">Jerry<br />Zhu</h1>
+        <!-- layer 2: the reveal -->
+        <div class="reveal-grid">
+          <div class="hero-copy">
+            <p class="mono kicker"><span class="dot"></span> Class of {profile.class} · Waterloo Varsity Ultimate</p>
+            <h1 class="hero-name">{profile.first}<br />{profile.last}</h1>
+            <p class="hero-role">Software Engineer @StackAdapt · BMath CS + Pure Math @UWaterloo · 30+ clubs, 50+ hackathons.</p>
+            <dl class="hero-stats">
+              {heroStats.map((s) => (
+                <div class="stat"><dd><b>{s.value}</b></dd><dt class="mono muted">{s.label}</dt></div>
+              ))}
+            </dl>
+            <div class="hero-cta">
+              <Button href={profile.resume}>Scouting report ↓</Button>
+              <Button href="#recruit" variant="ghost">Recruit me</Button>
+            </div>
+          </div>
 
-    <div class="hero-copy">
-      <p class="mono kicker"><span class="dot"></span> Class of {profile.class} · Waterloo Varsity Ultimate</p>
-      <h1 class="hero-name">{profile.first}<br />{profile.last}</h1>
-      <p class="hero-role">Software Engineer @StackAdapt · BMath CS + Pure Math @UWaterloo · 30+ clubs, 50+ hackathons.</p>
-      <dl class="hero-stats">
-        {heroStats.map((s) => (
-          <div class="stat"><dd><b>{s.value}</b></dd><dt class="mono muted">{s.label}</dt></div>
-        ))}
-      </dl>
-      <div class="hero-cta">
-        <Button href={profile.resume}>Scouting report ↓</Button>
-        <Button href="#recruit" variant="ghost">Recruit me</Button>
+          <!-- THE BLOCKER -->
+          <div class="blocker" aria-hidden="true">
+            <i class="x x1">+</i><i class="x x2">+</i>
+            <div class="ticker"><div class="track">
+              {[0, 1].map(() => <span>{ticker.map((t) => <b>{t}<em>✦</em></b>)}</span>)}
+            </div></div>
+            <i class="scan"></i>
+          </div>
+
+          <figure class="hero-fig">
+            <Image class="hero-photo" src={warriors} alt="Jerry Zhu in a Waterloo Warriors ultimate jersey" widths={[480, 720, 960]} sizes="(max-width: 800px) 90vw, 42vw" loading="eager" fetchpriority="high" format="webp" />
+            <figcaption class="mono">#27 · WARRIORS · OPEN B</figcaption>
+          </figure>
+        </div>
+
+        <!-- frame furniture -->
+        <div class="rule rule-t" aria-hidden="true"></div>
+        <div class="rule rule-b" aria-hidden="true"></div>
+        <span class="tag mono tl" aria-hidden="true">FIG.01 — JERRY ZHU</span>
+        <span class="tag mono tr" aria-hidden="true">43.47°N 80.54°W</span>
+        <span class="tag mono bl" aria-hidden="true">SCROLL ↓</span>
+        <span class="tag mono br" aria-hidden="true">©2026</span>
       </div>
     </div>
-
-    <a class="hero-scroll" href="#space" aria-label="Scroll down"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
   </div>
 </section>
 
 <style>
-  .hero { --p: 0; --c: 0; height: 380svh; position: relative; }
+  @property --ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+  .hero { --p: 0; --c: 0; --m: clamp(10px, 2vw, 28px); --cut: clamp(18px, 2.4vw, 36px); height: 380svh; position: relative; }
   :global(.no-js) .hero, .hero.static { --p: 1; --c: 1; height: auto; }
-  .hero-pin { position: sticky; top: 0; height: 100svh; overflow: clip; }
-  .static .hero-pin, :global(.no-js) .hero-pin { position: relative; }
+  .hero-pin { position: sticky; top: 0; height: 100svh; padding: calc(var(--m) + 56px) var(--m) var(--m); box-sizing: border-box; }
+  .static .hero-pin, :global(.no-js) .hero-pin { position: relative; min-height: 100svh; height: auto; }
 
-  /* media panel: full-bleed video that crops down into the right-hand portrait panel */
-  .hero-media { position: absolute; inset: 0; background: var(--bg-sunk); will-change: clip-path;
-    clip-path: inset(calc(var(--p) * 12svh) calc(var(--p) * 4vw) calc(var(--p) * 8svh) calc(var(--p) * 52vw) round calc(var(--p) * 28px)); }
-  .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: calc(1 - var(--p) * 0.7); }
-  .hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / .65)), radial-gradient(60% 60% at 75% 55%, transparent, rgb(0 0 0 / .35)); }
-  .hero-photo { position: absolute; right: 4vw; bottom: 8svh; height: 86svh; width: auto; max-width: none; object-fit: contain;
-    opacity: clamp(0, (var(--p) - 0.6) * 3.5, 1); transform: translateY(calc((1 - var(--p)) * 8%)); filter: drop-shadow(0 30px 40px rgb(0 0 0 / .5)); }
-  .hero-num { position: absolute; right: calc(4vw + 1.5rem); top: calc(12svh + 1rem); font-size: var(--step-1); color: var(--accent); opacity: var(--p); }
+  /* ---------- frame ---------- */
+  .frame { position: relative; height: 100%; padding: 2px; background: conic-gradient(from var(--ang), #ffffff14 0 55%, var(--accent) 78%, #fff 82%, #ffffff14 90% 100%);
+    animation: spin 7s linear infinite;
+    clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut)); }
+  @keyframes spin { to { --ang: 360deg; } }
+  .inner { position: relative; height: 100%; overflow: clip; background: var(--bg-sunk);
+    clip-path: polygon(calc(var(--cut) - 1px) 0, 100% 0, 100% calc(100% - var(--cut) + 1px), calc(100% - var(--cut) + 1px) 100%, 0 100%, 0 calc(var(--cut) - 1px)); }
 
-  .hero-wordmark { font: 800 clamp(5rem, 22vw, 22rem)/.8 var(--font-display); text-transform: uppercase; position: absolute; left: var(--gutter); bottom: 6svh; font-size: clamp(5rem, 22vw, 22rem); color: #fff; mix-blend-mode: normal;
-    opacity: max(0, calc(1 - var(--p) * 3.5)); transform: translateY(calc(var(--p) * -6svh)); pointer-events: none; line-height: .8; }
+  /* ---------- layer 1: video ---------- */
+  .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: calc(1 - var(--p)); }
+  .hero-shade { position: absolute; inset: 0; opacity: calc(1 - var(--p)); background: linear-gradient(180deg, rgb(0 0 0 / .25), transparent 35%, rgb(0 0 0 / .7)); }
+  .hero-wordmark { font: 800 clamp(5rem, 22vw, 22rem)/.8 var(--font-display); text-transform: uppercase; position: absolute; left: clamp(1.25rem, 3vw, 3rem); bottom: clamp(2.5rem, 6svh, 4rem); color: #fff; pointer-events: none;
+    opacity: max(0, calc(1 - var(--p) * 2.5)); transform: translateY(calc(var(--p) * -5svh)); }
 
-  .hero-copy { position: absolute; left: var(--gutter); top: 50%; width: min(46vw, 40rem); display: grid; gap: var(--s-4);
-    opacity: var(--c); transform: translate(calc((1 - var(--c)) * -48px), -50%); pointer-events: none; }
-  .hero-copy > * { pointer-events: auto; }
+  /* ---------- layer 2: reveal ---------- */
+  .reveal-grid { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) var(--blk, clamp(64px, 7vw, 110px)) minmax(0, 1fr); align-items: stretch;
+    padding: clamp(3rem, 6svh, 4.5rem) 0; opacity: var(--c); }
+  .hero-copy { align-self: center; padding: 0 clamp(1.25rem, 3vw, 3rem); display: grid; gap: var(--s-4); transform: translateX(calc((1 - var(--c)) * -40px)); }
   .kicker { display: flex; align-items: center; gap: var(--s-3); color: var(--accent); }
   .dot { width: .6rem; height: .6rem; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
   @keyframes pulse { 50% { opacity: .3; transform: scale(.7); } }
@@ -67,20 +97,62 @@ import Chip from "./Chip.astro";
   .hero-stats .stat b { font-size: var(--step-3); }
   .hero-stats dd { margin: 0; }
   .hero-cta { display: flex; gap: var(--s-3); flex-wrap: wrap; }
-  .hero-scroll { position: absolute; left: 50%; bottom: 2.5svh; translate: -50% 0; text-decoration: none; color: #fff; opacity: max(0, calc(1 - var(--p) * 6)); animation: bob 1.8s ease-in-out infinite; }
-  @keyframes bob { 50% { transform: translateY(6px); } }
 
+  .hero-fig { margin: 0; position: relative; min-height: 0; display: flex; align-items: flex-end; justify-content: center; transform: translateX(calc((1 - var(--c)) * 40px));
+    background: radial-gradient(70% 60% at 50% 60%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%); }
+  .hero-photo { height: 100%; width: auto; max-width: 100%; object-fit: contain; object-position: bottom center; filter: drop-shadow(0 30px 40px rgb(0 0 0 / .5)); }
+  .hero-fig figcaption { position: absolute; left: 50%; bottom: 0; translate: -50% 0; font-size: .7rem; letter-spacing: .14em; color: var(--accent); background: var(--bg-sunk); padding: .35rem .8rem; border: 1px solid var(--accent); white-space: nowrap; }
+
+  /* ---------- THE BLOCKER ---------- */
+  .blocker { position: relative; overflow: hidden; margin: calc(-1 * clamp(3rem, 6svh, 4.5rem)) 0; /* run edge to edge of the frame */
+    background:
+      repeating-linear-gradient(135deg, color-mix(in srgb, var(--accent) 22%, transparent) 0 8px, transparent 8px 16px),
+      var(--bg-sunk);
+    border-inline: 1px solid var(--accent);
+    box-shadow: 0 0 40px -6px color-mix(in srgb, var(--accent) 55%, transparent), inset 0 0 30px rgb(0 0 0 / .6); }
+  .blocker::before, .blocker::after { content: ""; position: absolute; inset-inline: 0; height: 14px; background: var(--accent); z-index: 2; }
+  .blocker::before { top: 0; clip-path: polygon(0 0, 100% 0, 50% 100%); height: 18px; }
+  .blocker::after { bottom: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); height: 18px; }
+  .ticker { position: absolute; inset: 22px 0; display: grid; place-items: center; overflow: hidden; mask: linear-gradient(transparent, #000 12% 88%, transparent); }
+  .track { writing-mode: vertical-rl; display: flex; position: absolute; top: 0; animation: up 22s linear infinite; font: 800 clamp(1.1rem, 1.7vw, 1.6rem)/1 var(--font-display); letter-spacing: .12em; color: var(--fg); }
+  .track span { display: flex; gap: 1.25rem; padding-block: .6rem; flex: none; }
+  .track b { font-weight: 800; display: flex; gap: 1.25rem; align-items: center; }
+  .track em { color: var(--accent); font-style: normal; }
+  @keyframes up { to { transform: translateY(-50%); } }
+  .x { position: absolute; left: 50%; translate: -50% 0; z-index: 3; font: 400 1rem/1 var(--font-mono); font-style: normal; color: var(--bg-sunk); }
+  .x1 { top: 1px; } .x2 { bottom: 1px; }
+  .scan { position: absolute; inset-inline: 0; height: 90px; z-index: 1; pointer-events: none; background: linear-gradient(transparent, color-mix(in srgb, var(--accent) 45%, transparent), transparent); animation: scan 3.2s ease-in-out infinite alternate; mix-blend-mode: screen; }
+  @keyframes scan { from { top: -10%; } to { top: 85%; } }
+
+  /* ---------- furniture ---------- */
+  .rule { position: absolute; inset-inline: calc(var(--cut) + 8px) var(--cut); height: 8px; opacity: .45; pointer-events: none;
+    background: repeating-linear-gradient(90deg, #fff 0 1px, transparent 1px 10px), repeating-linear-gradient(90deg, #fff 0 1px, transparent 1px 50px);
+    background-size: 100% 5px, 100% 8px; background-repeat: no-repeat; }
+  .rule-t { top: 0; } .rule-b { bottom: 0; transform: scaleY(-1); }
+  .tag { position: absolute; font-size: .66rem; letter-spacing: .16em; color: #fff; opacity: .75; z-index: 3; mix-blend-mode: difference; }
+  .tl { top: 14px; left: calc(var(--cut) + 12px); } .tr { top: 14px; right: 16px; }
+  .bl { bottom: 14px; left: 16px; animation: bob 1.8s ease-in-out infinite; } .br { bottom: 14px; right: calc(var(--cut) + 12px); }
+  @keyframes bob { 50% { transform: translateY(4px); } }
+
+  /* ---------- mobile: stack, blocker goes horizontal ---------- */
   @media (max-width: 800px) {
-    .hero-media { clip-path: inset(calc(var(--p) * 9svh) calc(var(--p) * 5vw) calc(var(--p) * 47svh) calc(var(--p) * 5vw) round calc(var(--p) * 22px)); }
-    .hero-photo { right: 50%; translate: 50% 0; bottom: 47svh; height: 44svh; }
-    .hero-num { right: calc(5vw + 1rem); top: calc(9svh + .75rem); }
-    .hero-copy { left: var(--gutter); right: var(--gutter); width: auto; top: auto; bottom: 3svh; transform: translateY(calc((1 - var(--c)) * 40px)); gap: var(--s-3); }
-    .hero-name { font-size: clamp(3.2rem, 17vw, 5rem); }
-    .hero-name br { display: none; }
-    .hero-name { word-spacing: .12em; }
+    .hero-pin { padding-top: calc(var(--m) + 52px); }
+    .reveal-grid { grid-template-columns: 1fr; grid-template-rows: auto 44px minmax(0, 1fr); padding: 2.75rem 0 0; }
+    .hero-copy { gap: var(--s-3); padding-top: .5rem; }
+    .hero-name { font-size: clamp(3.2rem, 17vw, 5rem); } .hero-name br { display: none; } .hero-name { word-spacing: .12em; }
     .hero-role { display: none; }
-    .hero-stats .stat b { font-size: var(--step-2); }
-    .hero-stats dt { font-size: .68rem; letter-spacing: .02em; }
+    .hero-stats { gap: var(--s-3); } .hero-stats .stat b { font-size: var(--step-2); } .hero-stats dt { font-size: .62rem; }
+    .hero-cta { display: none; }
+    .blocker { margin: 1rem 0 0; border-inline: 0; border-block: 1px solid var(--accent); }
+    .blocker::before, .blocker::after { display: none; }
+    .ticker { inset: 0 18px; }
+    .track { writing-mode: horizontal-tb; animation-name: left; }
+    .track span { padding-block: 0; padding-inline: .6rem; }
+    .x { display: none; }
+    .scan { inset-block: 0; inset-inline: auto; width: 90px; height: auto; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 45%, transparent), transparent); animation-name: scanx; }
+    @keyframes left { to { transform: translateX(-50%); } }
+    @keyframes scanx { from { left: -10%; } to { left: 85%; } }
+    .hero-photo { height: 100%; }
   }
-  @media (prefers-reduced-motion: reduce) { .dot, .hero-scroll { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .frame, .dot, .track, .scan, .bl { animation: none; } }
 </style>

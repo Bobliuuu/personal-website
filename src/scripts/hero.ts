@@ -11,8 +11,9 @@ export function initHero(reduce: boolean) {
   let raw = 0, shown = 0, target = 0, raf = 0;
   const update = () => {
     raw = clamp(scrollY / (hero.offsetHeight - innerHeight));
-    hero.style.setProperty("--p", ease(clamp((raw - 0.25) / 0.45)).toFixed(4));
-    hero.style.setProperty("--c", ease(clamp((raw - 0.55) / 0.35)).toFixed(4));
+    // video scrubs over the first ~45% of scroll, then fades to 0; reveal comes in as it dies
+    hero.style.setProperty("--p", clamp((raw - 0.45) / 0.3).toFixed(4));
+    hero.style.setProperty("--c", ease(clamp((raw - 0.62) / 0.3)).toFixed(4));
     target = raw;
     if (!raf) raf = requestAnimationFrame(seek);
   };
