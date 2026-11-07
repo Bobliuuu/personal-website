@@ -1,0 +1,44 @@
+---
+import Base from "../layouts/Base.astro";
+import Chip from "../components/Chip.astro";
+import Button from "../components/Button.astro";
+import SectionHead from "../components/SectionHead.astro";
+const colors = [
+  ["--bg", "Background"], ["--bg-raised", "Raised"], ["--bg-sunk", "Sunk"], ["--fg", "Foreground"],
+  ["--fg-muted", "Muted"], ["--line", "Line"], ["--accent", "Accent (disc)"], ["--accent-2", "Accent 2 (gold)"], ["--danger", "Danger"],
+];
+const type = [["--step-5", "Display XL"], ["--step-4", "Display"], ["--step-3", "Title"], ["--step-2", "Heading"], ["--step-1", "Lead"], ["--step-0", "Body"], ["--step--1", "Caption"]];
+const space = ["--s-1", "--s-2", "--s-3", "--s-4", "--s-5", "--s-6", "--s-7", "--s-8"];
+---
+<Base title="Design system | Jerry Zhu" description="Tokens, type, and components behind jerryzhu.org.">
+  <div class="wrap ds">
+    <SectionHead kicker="Design system" title="Field Notes" lede="Three layers: primitives, semantic tokens, components. Everything below renders from the live tokens in src/styles/tokens.css." />
+
+    <h3>Colour</h3>
+    <div class="swatches">{colors.map(([v, n]) => <div><i style={`background:var(${v})`}></i><b class="mono">{n}</b><code class="mono muted">{v}</code></div>)}</div>
+
+    <h3>Type</h3>
+    <div class="types">{type.map(([v, n]) => <div><span class="mono muted">{n} · {v}</span><p style={`font:800 var(${v})/1 var(--font-display);text-transform:uppercase`}>Huck it deep</p></div>)}</div>
+    <p style="font-family:var(--font-body)">Body: Inter Variable. Mono labels: JetBrains Mono. Display: Barlow Condensed 800, uppercase.</p>
+
+    <h3>Space</h3>
+    <div class="spaces">{space.map((s) => <div><span class="mono muted">{s}</span><i style={`width:var(${s})`}></i></div>)}</div>
+
+    <h3>Components</h3>
+    <div class="demo"><Button href="#">Solid</Button><Button href="#" variant="ghost">Ghost</Button></div>
+    <div class="demo"><Chip>Default</Chip><Chip variant="accent">Accent</Chip><Chip variant="gold">Gold</Chip></div>
+    <div class="stats demo"><div class="stat"><b>3.8</b><span class="mono">Stat</span></div></div>
+    <a class="card" href="#" style="max-width:22rem"><span class="mono muted">CARD</span><h3>Raised surface</h3><p class="muted">Hover for the lift.</p></a>
+
+    <h3>Motion</h3>
+    <p class="muted">Ease <code class="mono">--ease-out</code> for reveals, <code class="mono">--ease-snap</code> for state flips. Durations 120 / 240 / 500 / 900 ms. All motion collapses under <code class="mono">prefers-reduced-motion</code>.</p>
+  </div>
+</Base>
+<style>
+  .ds { padding-block: 8rem 6rem; display: grid; gap: var(--s-5); }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: var(--s-4); }
+  .swatches div { display: grid; gap: 4px; } .swatches i { height: 4.5rem; border-radius: var(--r-md); border: 1px solid var(--line); }
+  .types { display: grid; gap: var(--s-4); } .types p { max-width: none; }
+  .spaces div { display: flex; align-items: center; gap: var(--s-4); } .spaces span { width: 5rem; } .spaces i { height: 1rem; background: var(--accent); border-radius: 2px; }
+  .demo { display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
+</style>

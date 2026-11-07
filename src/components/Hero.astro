@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import warriors from "../assets/jerry-warriors.png";
+import { profile, heroStats } from "../data/site";
+import Button from "./Button.astro";
+import Chip from "./Chip.astro";
+---
+<section class="hero" id="top" data-hero>
+  <div class="hero-pin">
+    <div class="hero-media">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="/video/hero-poster.webp" aria-hidden="true" tabindex="-1">
+        <source src="/video/hero.av1.mp4" type='video/mp4; codecs="av01.0.05M.08"' />
+        <source src="/video/hero.h264.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-shade"></div>
+      <Image class="hero-photo" src={warriors} alt="Jerry Zhu in a Waterloo Warriors ultimate jersey" widths={[480, 720, 960]} sizes="(max-width: 800px) 90vw, 42vw" loading="eager" fetchpriority="high" format="webp" />
+      <span class="hero-num mono" aria-hidden="true">'27</span>
+    </div>
+
+    <h1 class="hero-wordmark" aria-hidden="true">Jerry<br />Zhu</h1>
+
+    <div class="hero-copy">
+      <p class="mono kicker"><span class="dot"></span> Class of {profile.class} · Waterloo Varsity Ultimate</p>
+      <h1 class="hero-name">{profile.first}<br />{profile.last}</h1>
+      <p class="hero-role">{profile.tagline}. Currently building at StackAdapt, compiling programs into transformer weights on the side.</p>
+      <dl class="hero-stats">
+        {heroStats.map((s) => (
+          <div class="stat"><dd><b>{s.value}</b></dd><dt class="mono muted">{s.label}</dt></div>
+        ))}
+      </dl>
+      <div class="hero-cta">
+        <Button href={profile.resume}>Scouting report ↓</Button>
+        <Button href="#recruit" variant="ghost">Recruit me</Button>
+      </div>
+    </div>
+
+    <a class="hero-scroll mono" href="#scouting" aria-label="Scroll">Scroll ↓</a>
+  </div>
+</section>
+
+<style>
+  .hero { --p: 0; --c: 0; height: 240svh; position: relative; }
+  :global(.no-js) .hero, .hero.static { --p: 1; --c: 1; height: auto; }
+  .hero-pin { position: sticky; top: 0; height: 100svh; overflow: clip; }
+  .static .hero-pin, :global(.no-js) .hero-pin { position: relative; }
+
+  /* media panel: full-bleed video that crops down into the right-hand portrait panel */
+  .hero-media { position: absolute; inset: 0; background: var(--bg-sunk); will-change: clip-path;
+    clip-path: inset(calc(var(--p) * 12svh) calc(var(--p) * 4vw) calc(var(--p) * 8svh) calc(var(--p) * 52vw) round calc(var(--p) * 28px)); }
+  .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: calc(1 - var(--p) * 0.7); }
+  .hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / .65)), radial-gradient(60% 60% at 75% 55%, transparent, rgb(0 0 0 / .35)); }
+  .hero-photo { position: absolute; right: 4vw; bottom: 8svh; height: 86svh; width: auto; max-width: none; object-fit: contain;
+    opacity: clamp(0, (var(--p) - 0.6) * 3.5, 1); transform: translateY(calc((1 - var(--p)) * 8%)); filter: drop-shadow(0 30px 40px rgb(0 0 0 / .5)); }
+  .hero-num { position: absolute; right: calc(4vw + 1.5rem); top: calc(12svh + 1rem); font-size: var(--step-1); color: var(--accent); opacity: var(--p); }
+
+  .hero-wordmark { position: absolute; left: var(--gutter); bottom: 6svh; font-size: clamp(5rem, 22vw, 22rem); color: #fff; mix-blend-mode: normal;
+    opacity: max(0, calc(1 - var(--p) * 3.5)); transform: translateY(calc(var(--p) * -6svh)); pointer-events: none; line-height: .8; }
+
+  .hero-copy { position: absolute; left: var(--gutter); top: 50%; width: min(46vw, 40rem); display: grid; gap: var(--s-4);
+    opacity: var(--c); transform: translate(calc((1 - var(--c)) * -48px), -50%); pointer-events: none; }
+  .hero-copy > * { pointer-events: auto; }
+  .kicker { display: flex; align-items: center; gap: var(--s-3); color: var(--accent); }
+  .dot { width: .6rem; height: .6rem; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 50% { opacity: .3; transform: scale(.7); } }
+  .hero-name { font-size: clamp(4rem, 9vw, 8.5rem); line-height: .82; }
+  .hero-role { color: var(--fg-muted); max-width: 34ch; }
+  .hero-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); margin: 0; }
+  .hero-stats .stat b { font-size: var(--step-3); }
+  .hero-stats dd { margin: 0; }
+  .hero-cta { display: flex; gap: var(--s-3); flex-wrap: wrap; }
+  .hero-scroll { position: absolute; left: 50%; bottom: 2.5svh; translate: -50% 0; text-decoration: none; color: #fff; opacity: max(0, calc(1 - var(--p) * 6)); animation: bob 1.8s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(6px); } }
+
+  @media (max-width: 800px) {
+    .hero-media { clip-path: inset(calc(var(--p) * 9svh) calc(var(--p) * 5vw) calc(var(--p) * 47svh) calc(var(--p) * 5vw) round calc(var(--p) * 22px)); }
+    .hero-photo { right: 50%; translate: 50% 0; bottom: 47svh; height: 44svh; }
+    .hero-num { right: calc(5vw + 1rem); top: calc(9svh + .75rem); }
+    .hero-copy { left: var(--gutter); right: var(--gutter); width: auto; top: auto; bottom: 3svh; transform: translateY(calc((1 - var(--c)) * 40px)); gap: var(--s-3); }
+    .hero-name { font-size: clamp(3.2rem, 17vw, 5rem); }
+    .hero-name br { display: none; }
+    .hero-name { word-spacing: .12em; }
+    .hero-role { display: none; }
+    .hero-stats .stat b { font-size: var(--step-2); }
+    .hero-stats dt { font-size: .68rem; letter-spacing: .02em; }
+  }
+  @media (prefers-reduced-motion: reduce) { .dot, .hero-scroll { animation: none; } }
+</style>

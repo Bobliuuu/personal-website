@@ -1,0 +1,84 @@
+/* ============================================================
+   DESIGN TOKENS: single source of truth.
+   Primitive -> semantic -> component. Never hard-code values elsewhere.
+   ============================================================ */
+@layer reset, tokens, base, components, utilities;
+
+@layer tokens {
+  :root {
+    /* ---- primitives: colour ---- */
+    --ink-1000: #060706;
+    --ink-900: #0b0d0c;
+    --ink-800: #121513;
+    --ink-700: #1b1f1c;
+    --ink-600: #2a2f2b;
+    --ink-400: #5d655f;
+    --ink-300: #8b948d;
+    --paper-100: #f4f2ea;
+    --paper-200: #e8e5d9;
+    --paper-300: #d4d0c0;
+    --lime-400: #d4ff3a;   /* disc / high-vis */
+    --lime-600: #8fb800;
+    --gold-400: #ffc72c;   /* Warriors gold */
+    --red-400: #ff4d3d;    /* flag / turnover */
+
+    /* ---- primitives: type ---- */
+    --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --font-body: "Inter Variable", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+    --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.85rem);
+    --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+    --step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.55rem);
+    --step-2: clamp(1.6rem, 1.4rem + 1vw, 2.2rem);
+    --step-3: clamp(2.2rem, 1.7rem + 2.5vw, 3.6rem);
+    --step-4: clamp(3rem, 2rem + 5vw, 6rem);
+    --step-5: clamp(4.5rem, 2.5rem + 10vw, 11rem);
+
+    /* ---- space (4px base) ---- */
+    --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem;
+    --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4.5rem; --s-9: 7rem; --s-10: 10rem;
+
+    /* ---- shape / elevation ---- */
+    --r-sm: 6px; --r-md: 14px; --r-lg: 24px; --r-pill: 999px;
+    --shadow-1: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    --shadow-2: 0 30px 80px -30px rgb(0 0 0 / 0.7);
+
+    /* ---- motion ---- */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+    --dur-1: 120ms; --dur-2: 240ms; --dur-3: 500ms; --dur-4: 900ms;
+
+    /* ---- layout ---- */
+    --page-max: 1320px;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    --z-nav: 50; --z-overlay: 40;
+
+    /* ---- semantic (dark default) ---- */
+    --bg: var(--ink-900);
+    --bg-raised: var(--ink-800);
+    --bg-sunk: var(--ink-1000);
+    --fg: var(--paper-100);
+    --fg-muted: var(--ink-300);
+    --line: var(--ink-600);
+    --accent: var(--lime-400);
+    --accent-fg: var(--ink-1000);
+    --accent-2: var(--gold-400);
+    --danger: var(--red-400);
+    color-scheme: dark;
+  }
+
+  :root[data-theme="light"] {
+    --bg: var(--paper-100);
+    --bg-raised: #fff;
+    --bg-sunk: var(--paper-200);
+    --fg: var(--ink-900);
+    --fg-muted: var(--ink-400);
+    --line: var(--paper-300);
+    --accent: var(--ink-900);
+    --accent-fg: var(--lime-400);
+    --accent-2: #b88400;
+    --shadow-1: 0 1px 0 #fff inset, 0 8px 24px -12px rgb(0 0 0 / 0.2);
+    color-scheme: light;
+  }
+}

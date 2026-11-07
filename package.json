@@ -1,64 +1,26 @@
 {
   "name": "personal-website",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "dev:turbopack": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint .",
-    "analyze": "ANALYZE=true npm run build",
-    "lighthouse": "npx -y lighthouse http://localhost:3000 --view",
-    "optimize-images": "./scripts/optimize-images.sh",
-    "type-check": "tsc --noEmit",
-    "test:build": "npm run lint && npm run type-check && npm run build",
-    "test:all": "./scripts/test-website.sh",
-    "ci": "npm run lint && npm run build"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "deploy": "astro build && wrangler deploy"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@radix-ui/react-slot": "^1.1.2",
-    "@react-three/cannon": "^6.6.0",
-    "@react-three/drei": "latest",
-    "@react-three/fiber": "^9",
-    "@tsparticles/engine": "^3.8.1",
-    "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.8.1",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.12.1",
-    "jquery": "^3.7.1",
-    "lucide-react": "^0.344.0",
-    "next": "16.1.6",
-    "next-themes": "^0.4.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-vertical-timeline-component": "^3.5.3",
-    "recharts": "^3.7.0",
-    "tailwind-merge": "^3.0.1",
-    "tailwindcss-animate": "^1.0.7",
-    "three": "^0.176.0",
-    "tsparticles": "^3.8.1",
-    "tsparticles-slim": "^2.12.0",
-    "zustand": "^5.0.11"
-  },
-  "pnpm": {
-    "overrides": {
-      "react": "^19.0.0",
-      "react-dom": "^19.0.0"
-    }
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "astro": "^7.3.8",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.3",
-    "@types/jquery": "^3.5.32",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9.39.2",
-    "eslint-config-next": "16.1.6",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.158.0"
   }
 }

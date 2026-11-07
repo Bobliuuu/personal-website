@@ -1,5 +1,0 @@
-machine:
-  network:
-    nameservers:
-      - <redacted-host>
-      - 1.1.1.1

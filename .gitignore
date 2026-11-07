@@ -57,3 +57,6 @@ ssl/
 
 # Monitoring
 .pm2/
+dist/
+.astro/
+node_modules/

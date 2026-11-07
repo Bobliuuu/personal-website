@@ -1,45 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# jerryzhu.org
 
-## Getting Started
+Recruiting-style profile for Jerry Zhu: a varsity ultimate player who also happens to ship backend, data, and ML systems.
 
-First, run the development server:
+**Stack:** Astro 7 (static) · vanilla CSS with design tokens · ~3 KB of hand-written TS · self-hosted fonts · Cloudflare static assets.
+No React, no three.js, no particles library. The old Next.js version shipped all of those.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:4321
+npm run build      # -> dist/
+npm run preview
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy to Cloudflare
 
-### Interactive Control Plane
+```bash
+npx wrangler login        # once
+npm run deploy            # astro build && wrangler deploy
+```
 
-A Proxmox-style “Personal Control Plane” lives at **[http://localhost:3000/interactive](http://localhost:3000/interactive)**. It includes a dashboard, projects, infra docs, a virtual terminal, command palette (⌘K), and Hyprland-style workspaces.
+Config lives in `wrangler.jsonc` (static assets from `dist/`, 404 page enabled). Cache and security headers are in `public/_headers`. Or connect the repo in the Cloudflare dashboard (build command `npm run build`, output `dist`).
 
-**Keybindings:** `` ` `` — toggle terminal overlay · **⌘K** — command palette · **Esc** — close overlays  
+## Hero video
 
-See [INTERACTIVE-README.md](./INTERACTIVE-README.md) for routes, terminal commands, and details.
+The hero is a scroll-driven transition: full-bleed video that crops into the right-hand portrait panel while name and stats slide in.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+scripts/encode-hero.sh path/to/huck.mov 12 6   # start at 12s, 6s loop
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Writes AV1 + H.264 + poster into `public/video/` (muted, no audio, 1080p max). **The current clip is a synthetic placeholder.**
 
-## Learn More
+## Design system
 
-To learn more about Next.js, take a look at the following resources:
+See [DESIGN.md](./DESIGN.md) and the live style guide at `/design`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Content
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
+All copy lives in `src/data/*.ts`. Edit data, not markup.
